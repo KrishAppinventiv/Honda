@@ -18,6 +18,7 @@ import {ScreenNames} from '../../utils/screenNames';
 import {useNavigation} from '@react-navigation/native';
 import {colors} from '../../theme';
 import styles from './styles';
+import CustomButton from '../../components/CustomButton';
 
 type SignNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -75,18 +76,13 @@ const SignIn = () => {
         )}
 
         <View style={styles.bottomView}>
-          <TouchableOpacity
-            style={[styles.button, !isValid && styles.disabledButton]}
+          <CustomButton
+            onPress={() => navigation.navigate(ScreenNames.Otp)}
+            text="GET OTP"
+            style={[styles.button, !isValid ? styles.disabledButton : {}]}
             disabled={!isValid}
-            onPress={() => navigation.navigate(ScreenNames.Otp)}>
-            <Text
-              style={[
-                styles.buttonText,
-                {color: !isValid ? colors.grey : '#fff'},
-              ]}>
-              GET OTP
-            </Text>
-          </TouchableOpacity>
+            textStyle={{color: !isValid ? colors.grey : '#fff'}}
+          />
 
           <Text style={styles.footerText}>
             By signing in I agree to{' '}

@@ -67,6 +67,11 @@ export default StyleSheet.create({
     position: 'absolute',
     right: vh(15), 
   },
+  profile:{
+     height:vh(40),
+     width:vh(40),
+     borderRadius:vh(56.67)
+  },
   notifyView: {
     height: vh(30),
     width: vh(30),

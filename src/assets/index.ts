@@ -44,6 +44,9 @@ const Images = {
   direction:require('./images/direction.png'),
   location: require('./images/location.png'),
   time:require('./images/time.png'),
+  redMarker:require('./images/redMarker.png'),
+  bell: require('./images/bell.png'),
+  profile: require('./images/profile.png'),
 };
 
 export {Images};

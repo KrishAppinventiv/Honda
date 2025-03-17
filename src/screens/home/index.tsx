@@ -8,6 +8,7 @@ import {
   Image,
   TouchableOpacity,
   Dimensions,
+  SafeAreaView,
 } from 'react-native';
 import Carousel from '../../components/Carousel';
 import ProductCard from '../../components/ProductCard';
@@ -20,6 +21,7 @@ import {useNavigation} from '@react-navigation/native';
 import {ScreenNames} from '../../utils/screenNames';
 import {RootStackParamList} from '../../utils/types';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import GlobalHeader from '../../components/GlobalHeader';
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -89,8 +91,9 @@ const Home: React.FC = () => {
   const navigation = useNavigation<HomeScreenNavigationProp>();
 
   return (
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-      <View style={styles.headerContainer}>
+    <SafeAreaView style={styles.container}>
+    <ScrollView showsVerticalScrollIndicator={false}>
+      {/* <View style={styles.headerContainer}>
         <Image source={Images.honda} style={styles.logo} />
 
         <TouchableOpacity style={styles.notificationWrapper}>
@@ -101,7 +104,16 @@ const Home: React.FC = () => {
             />
           </View>
         </TouchableOpacity>
-      </View>
+      </View> */}
+
+<GlobalHeader
+      // headerStyle={styles.container}
+      backButton
+      backIcon={Images.profile}
+      backIconStyle={styles.profile}
+      rightIcon={Images.bell}
+      rightButton
+    />
 
       <TouchableOpacity
         activeOpacity={0.7}
@@ -185,7 +197,9 @@ const Home: React.FC = () => {
         keyExtractor={item => item.id}
         contentContainerStyle={styles.listContainer}
       />
+     
     </ScrollView>
+    </SafeAreaView>
   );
 };
 

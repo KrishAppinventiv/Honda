@@ -101,11 +101,7 @@ const Carousel: React.FC = () => {
         )}
         keyExtractor={item => item.id}
       />
-      {/* <View style={styles.pagination}>
-        {slides.map((_, index) => (
-          <View key={index} style={[styles.dot, activeIndex === index && styles.activeDot]} />
-        ))}
-      </View> */}
+      
       <View style={styles.pagination}>
         {slides.map((_, index) => {
           const widthAnimation = scrollX.interpolate({

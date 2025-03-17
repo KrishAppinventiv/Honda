@@ -7,9 +7,9 @@ import {
   FlatList,
   TouchableOpacity,
   Image,
-  Dimensions,
+ 
 } from 'react-native';
-import MapView, {Marker} from 'react-native-maps';
+import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import Geolocation from 'react-native-geolocation-service';
 import DropDownPicker from 'react-native-dropdown-picker';
 import {colors} from '../../theme';
@@ -231,7 +231,8 @@ const DealerSearch = () => {
       </View>
 
       <View style={styles.mapFlex}>
-        <MapView style={styles.map} region={region}>
+        <MapView style={styles.map}
+          region={region}>
           {dealers.map(dealer => (
             <Marker
               key={dealer.id}

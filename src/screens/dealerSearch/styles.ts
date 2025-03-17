@@ -74,11 +74,11 @@ export default StyleSheet.create({
         borderWidth: 1,
         width: '100%',
       },
-      map: {marginBottom: vh(10), flex: 1},
+      map: { ...StyleSheet.absoluteFillObject },
       dealerCard: {
         backgroundColor: '#fff',
         paddingVertical: vh(16),
-        marginVertical: vh(5),
+        // marginVertical: vh(5),
         paddingHorizontal: vh(12),
         borderRadius: 10,
         shadowColor: '#000',

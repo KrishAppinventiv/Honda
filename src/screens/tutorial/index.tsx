@@ -1,6 +1,5 @@
 import {
   Dimensions,
-  FlatList,
   Image,
   StyleSheet,
   Text,
@@ -13,8 +12,9 @@ import React, {useRef, useState} from 'react';
 import {Images} from '../../assets';
 import {vh, vw} from '../../utils/dimension';
 import {colors} from '../../theme';
-import Button from '../../components/Button';
+import Button from '../../components/CustomButton';
 import {useNavigation} from '@react-navigation/native';
+import CustomFlatList from '../../components/CustomFlatList';
 import styles from './styles';
 const {width: screenWidth} = Dimensions.get('window');
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
@@ -34,7 +34,7 @@ interface BannerItem {
 
 const Tutorial = () => {
   const [activeSlide, setActiveSlide] = useState(0);
-  const flatListRef = useRef<FlatList<BannerItem>>(null);
+  const flatListRef = useRef(null);
   const navigation = useNavigation<TutorialScreenNavigationProp>();
 
   const scrollX = useRef(new Animated.Value(0)).current;
@@ -81,7 +81,7 @@ const Tutorial = () => {
 
   return (
     <View style={styles.container}>
-      <FlatList
+      <CustomFlatList
         ref={flatListRef}
         data={banners}
         renderItem={renderItem}
