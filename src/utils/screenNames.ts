@@ -1,7 +1,7 @@
-
-
-
 enum ScreenNames{
+  SPLASH_SCREEN= 'Splash',
+  ONBOARDING= 'Onboarding',
+  HOME_SCREEN= 'HOME',
   Home= 'Home',
   Login= 'Login',
   Splash= 'Splash',
@@ -33,7 +33,22 @@ enum ScreenNames{
   Promotion='Promotion',
   Training='Training',
   More='More',
-  DealerSearch='DealerSearch'
+  DealerSearch='DealerSearch',
+  ProductDetailPage = 'ProductDetailPage',
+  HondaCategory = 'HondaCategroy',
+  GenratorProductListing = 'GenratorProductListing',
+  newArrivals='newArrivals',
+  Notification = 'Notification',
+  Settings = 'Settings',
+  ToggleNotifications = 'ToggleNotifications',
+  FaqScreen = 'FaqScreen',
+  PrivacePolicy = 'PrivacePolicy',
+  WebViewScreen = 'WebViewScreen',
+  NewHondaCategory = 'NewHondaCategory',
+  ProfileScreen = 'ProfileScreen',
+  RetailerScreen = 'RetailerScreen',
+  RetailerFormScreen = 'RetailerFormScreen',
+  YoutubeVideoScreen = 'YoutubeVideoScreen'
 } ;
-
 export {ScreenNames};
+

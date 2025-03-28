@@ -7,8 +7,9 @@ import {
   FlatList,
   StyleSheet,
 } from "react-native";
-import { vh, vw } from "../../utils/dimension";
-import { colors } from "../../theme";
+import { vh, vw } from "../../styles";
+import colors from "../../utils/colors";
+
 
 interface LocationData {
   state: string;
@@ -69,6 +70,7 @@ const CustomLocationSearch = ({ onSelect }: { onSelect: (location: string) => vo
             onChangeText={setSearchText}
           />
           <FlatList
+            removeClippedSubviews={false}
             data={filteredStates}
             keyExtractor={(item) => item.state}
             renderItem={({ item }) => (
@@ -96,6 +98,7 @@ const CustomLocationSearch = ({ onSelect }: { onSelect: (location: string) => vo
             onChangeText={setSearchText}
           />
           <FlatList
+            removeClippedSubviews={false}
             data={filteredCities}
             keyExtractor={(item) => item.city}
             renderItem={({ item }) => (
@@ -123,6 +126,7 @@ const CustomLocationSearch = ({ onSelect }: { onSelect: (location: string) => vo
             onChangeText={setSearchText}
           />
           <FlatList
+            removeClippedSubviews={false}
             data={filteredPincodes}
             keyExtractor={(item) => item}
             renderItem={({ item }) => (

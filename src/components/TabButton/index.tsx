@@ -1,7 +1,7 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
-import { vh, vw } from '../../utils/dimension';
-import { colors } from '../../theme';
+import { vh, vw } from '../../styles';
+import colors from '../../utils/colors';
 
 
 

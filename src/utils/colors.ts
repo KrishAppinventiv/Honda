@@ -1,0 +1,32 @@
+export default {
+    black: '#333333',
+    red: '#ff0000',
+    grey: '#656565',
+    textGrey: '#5b5b5b',
+    midGrey: '#555555',
+    white: '#ffffff',
+    main: '#73A5C6',
+    primary:'#E41D2D',
+    lightGrey:'#9DA7C4',
+    backgroundCarousel: 'rgba(243, 246, 250, 1)',
+    inactiveDot:'rgba(228, 29, 45, 0.4)',
+    secondryBlack: 'rgba(5, 5, 7, 1)',
+    lightText: 'rgba(124, 133, 133, 1)',
+    borderLight: 'rgba(242, 243, 243, 1)',
+    backButtonBackground: '#F3F6FA',
+    descritptionText:'#7C8585',
+    inActiveTab:'#8CA2B4',
+    modalBackground: '#00000080',
+    dateTextColor: '#1D1B20',
+    monthTextColor: '#49454F',
+    headerButton:'#F4F7FF',
+    lightBlack: '#050507',
+    lightGreyBlue: '#7C8585',
+    loaderColor: '#0000ff',
+    shadowColor:'#000',
+    bottomTabShadow: 'rgba(220, 227, 237, 0.6)',
+    borderSecond: '#D4DAEA',
+    greenText: 'rgba(32, 178, 51, 1)'
+    
+  };
+  

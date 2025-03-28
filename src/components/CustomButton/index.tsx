@@ -1,77 +1,69 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import {
-  TouchableOpacity,
+  ImageSourcePropType,
+  ImageStyle,
+  StyleProp,
   Text,
-  StyleSheet,
-  ViewStyle,
   TextStyle,
+  TouchableOpacity,
+  ViewStyle,
+  Image,
 } from 'react-native';
-import { colors } from '../../theme';
-import { vh, vw } from '../../utils/dimension';
 
-interface ButtonProps {
+import {styles} from './styles';
+
+interface CustomButtonProps {
   onPress: () => void;
-  text: string;
-  style?: ViewStyle | ViewStyle[];
-  disabled?: boolean;
-  textStyle?: TextStyle | TextStyle[];
-  fullWidth?: boolean; // Full-width styling
+  buttonText: string;
+  iconSource?: ImageSourcePropType;
+  buttonStyle?: StyleProp<ViewStyle>;
+  disabledButtonStyle?: StyleProp<ViewStyle>;
+  disabledButtonTextStyle?: StyleProp<TextStyle>;
+  iconStyle?: StyleProp<ImageStyle>;
+  textStyle?: StyleProp<TextStyle>;
+  isButtonDisabled?: boolean;
+  style?: StyleProp<ViewStyle>;
 }
 
-const CustomButton: React.FC<ButtonProps> = ({
-  onPress,
-  text,
-  style,
-  disabled = false,
+const CustomButton = ({
+  buttonText,
+  buttonStyle,
   textStyle,
-  fullWidth,
-}) => {
-  // Use useMemo to optimize styles and avoid unnecessary re-renders
-  const buttonStyles = useMemo(
-    () => [styles.button, fullWidth && styles.fullWidth, disabled && styles.disabledButton, style].filter(Boolean) as ViewStyle[],
-    [fullWidth, disabled, style]
-  );
-
-  const textStyles = useMemo(
-    () => [styles.buttonText, textStyle].filter(Boolean) as TextStyle[],
-    [textStyle]
-  );
-
+  disabledButtonStyle,
+  disabledButtonTextStyle,
+  iconSource,
+  iconStyle,
+  onPress,
+  isButtonDisabled = false,
+  style,
+}: CustomButtonProps) => {
   return (
     <TouchableOpacity
-      style={buttonStyles}
+      style={[
+        styles.submitButton,
+        buttonStyle,
+        style,
+        isButtonDisabled && [styles.disabledButton, disabledButtonStyle],
+      ]}
       onPress={onPress}
-      disabled={disabled}
-      activeOpacity={disabled ? 1 : 0.7} // Prevent click animation when disabled
-    >
-      <Text style={textStyles}>{text}</Text>
+      activeOpacity={0.7}
+      disabled={isButtonDisabled}>
+      {iconSource && (
+        <Image source={iconSource} style={[styles.icon, iconStyle]} />
+      )}
+      <Text
+        style={[
+          styles.submitButtonText,
+          textStyle,
+          isButtonDisabled && [
+            styles.disabledButtonText,
+            disabledButtonTextStyle,
+          ],
+        ]}>
+        {buttonText}
+      </Text>
     </TouchableOpacity>
   );
 };
-
-const styles = StyleSheet.create({
-  button: {
-    backgroundColor: colors.main,
-    paddingVertical: vh(16),
-    paddingHorizontal: vw(20),
-    borderRadius: vh(20),
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  fullWidth: {
-    width: '90%',
-    alignSelf: 'center',
-  },
-  disabledButton: {
-    backgroundColor: colors.grey,
-    opacity: 0.5,
-  },
-  buttonText: {
-    color: '#fff',
-    textAlign: 'center',
-    fontSize: vw(16),
-    fontWeight: '600',
-  },
-});
 
 export default CustomButton;

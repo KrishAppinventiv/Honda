@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { Images } from '../../assets';
-import { vh, vw } from '../../utils/dimension';
+import { vw, vh } from '../../styles';
 
 
 interface HiValueCardProps {

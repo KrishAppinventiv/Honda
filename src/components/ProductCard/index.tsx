@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, Dimensions } from 'react-native';
-import { vh } from '../../utils/dimension';
-import { colors } from '../../theme';
+import { View, Text, Image, StyleSheet, Dimensions, Pressable, TouchableOpacity } from 'react-native';
+import { vh } from '../../styles';
+import colors from '../../utils/colors';
 const {width: screenWidth} = Dimensions.get('window');
 interface ProductProps {
   item: {
@@ -10,13 +10,14 @@ interface ProductProps {
     price?: string;
     categoryName?: string;
     image: any;
+    onPress?: any
   };
   textAlign?: 'left' | 'center' | 'right';
 }
 
-const ProductCard: React.FC<ProductProps> = ({ item, textAlign }) => {
+const ProductCard: React.FC<ProductProps> = ({ item, textAlign,onPress }) => {
   return (
-    <View style={[styles.card,item.categoryName && {height:vh(183)}]}>
+    <TouchableOpacity onPress={onPress} style={[styles.card,item.categoryName && {height:vh(193),width:screenWidth/3 + vh(3)}]}>
       <View style={styles.greyView}>
         <Image source={item.image} style={styles.image} />
       </View>
@@ -25,7 +26,7 @@ const ProductCard: React.FC<ProductProps> = ({ item, textAlign }) => {
         {item.categoryName && <Text style={[styles.category, { textAlign }]}>{item.categoryName}</Text>}
         {item.price && <Text style={[styles.price, { textAlign }]}>{item.price}</Text>}
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -40,13 +41,12 @@ const styles = StyleSheet.create({
     borderRadius: vh(8),
   },
   card: {
-    width:screenWidth/3 + vh(3),
+    width:screenWidth/3 - vh(15),
     height:vh(168),
     backgroundColor: colors.white,
     borderRadius: vh(8),
     borderWidth: 1,
-    borderColor: '#F3F6FA',
-   
+    borderColor: colors.backButtonBackground,
   },
   image: {
     width: vh(100),
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     fontSize: vh(13),
     fontWeight: '400',
     color: 'gray',
-    marginTop: 2,
+    marginTop: vh(2),
     marginStart:vh(5)
   },
   price: {
@@ -71,6 +71,6 @@ const styles = StyleSheet.create({
     color: colors.black,
     fontWeight:'600',
     marginTop: vh(5),
-   marginStart:vh(5)
+    marginStart:vh(5)
   },
 });

@@ -3,61 +3,70 @@ import {
   View,
   Image,
   TouchableOpacity,
-  StyleSheet,
   ImageSourcePropType,
-  Platform,
+  Text,
+  StyleSheet,
 } from 'react-native';
-import { Images} from '../../assets';
-import { vh, vw } from '../../utils/dimension';
-import { colors } from '../../theme';
-
+import {Images} from '../../assets';
+import styles from './styles';
 
 interface HeaderProps {
   headerStyle?: object;
-  backButton?: boolean;
-  backIcon?: ImageSourcePropType;
-  onBackPress?: () => void;
-  backButtonStyle?: object;
-  backIconStyle?: object;
+  leftIcon?: ImageSourcePropType;
+  onleftPress?: () => void;
+  leftButtonStyle?: object;
+  leftIconStyle?: object;
   headerImgStyle?: object;
-  rightButton?: boolean;
+  textHeading?: string;
   rightIcon?: ImageSourcePropType;
   onRightPress?: () => void;
+  rightButton?: boolean;
   rightButtonStyle?: object;
   rightIconStyle?: object;
+  leftButton?: boolean;
+  backIcon?: any;
+  onBackPress?: () => void;
 }
 
-const GlobalHeader = ({
-  backButton = false,
-  backIcon,
-  onBackPress,
+const GlobalHeader: React.FC<HeaderProps> = ({
   headerStyle,
-  backButtonStyle,
-  backIconStyle,
+  leftIcon,
+  onleftPress,
+  leftButtonStyle,
+  leftIconStyle,
   headerImgStyle,
-  rightButton = false,
+  textHeading,
   rightIcon,
   onRightPress,
+  rightButton,
   rightButtonStyle,
   rightIconStyle,
+  leftButton,
+  
+  
 }: HeaderProps) => {
   return (
     <View style={[styles.header, headerStyle]}>
-      {/* Left Back Button */}
-      {backButton && (
+     
+      {leftButton && (
         <TouchableOpacity
-          style={[styles.backButton, backButtonStyle]}
-          onPress={onBackPress}>
-          {backIcon && (
-            <Image source={backIcon} style={[styles.backIcon, backIconStyle]} />
+          style={[styles.backButton, leftButtonStyle]}
+          onPress={onleftPress}>
+          {leftIcon && (
+            <Image source={leftIcon} style={[styles.backIcon, leftIconStyle]} />
           )}
         </TouchableOpacity>
       )}
+     
+      <View style={{alignItems: 'center'}}>
+        <Image
+          source={Images.honda}
+          style={[styles.headerImg, headerImgStyle]}
+        />
+        {textHeading && <Text style={styles.textHeading}>{textHeading}</Text>}
+      </View>
 
-      {/* Logo */}
-      <Image source={Images.honda} style={[styles.headerImg, headerImgStyle]} />
-
-      {/* Right Button */}
+      
       {rightButton && (
         <TouchableOpacity
           style={[styles.rightButton, rightButtonStyle]}
@@ -73,41 +82,5 @@ const GlobalHeader = ({
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  header: {
-    paddingVertical:Platform.OS==='ios'? vh(14):vh(38),
-    paddingHorizontal: vw(16),
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  headerImg: {
-    width: vw(131.86),
-    height: vw(16),
-    resizeMode: 'contain',
-    alignSelf: 'center',
-    flex: 1,
-  },
-  backButton: {
-    
-   
-   
-  },
-  backIcon: {
-    width: vw(24),
-    height: vw(24),
-    resizeMode: 'contain',
-  },
-  rightButton: {
-    // padding: vw(8),
-    borderRadius: 100,
-    // backgroundColor: colors.red,
-  },
-  rightIcon: {
-    width: vw(40),
-    height: vw(40),
-    resizeMode: 'contain',
-  },
-});
 
 export default GlobalHeader;

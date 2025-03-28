@@ -37,6 +37,8 @@ export type RootStackParamList = {
     [ScreenNames.DealerSearch]:undefined;
     [ScreenNames.Stream]:undefined;
     [ScreenNames.Role]:undefined;
+    [ScreenNames.newArrivals]:undefined;
+    [ScreenNames.GenratorProductListing]:undefined;
     [ScreenNames.UserChat]: { 
       selectedUser?: CustomContact; 
     };
@@ -44,5 +46,9 @@ export type RootStackParamList = {
     [ScreenNames.Search]: { contacts: CustomContact[] };  
     [ScreenNames.Chat]: { roomId: string; selectedUser: CustomContact }; 
     [ScreenNames.GroupChatting]: { roomId: string }; 
+    [ScreenNames.ProductDetailPage]:undefined
+    [ScreenNames.Training]:undefined
+    [ScreenNames.WebViewScreen]:{url:string}
+    [ScreenNames.RetailerFormScreen]:{}
 
   };

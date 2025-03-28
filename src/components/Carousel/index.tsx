@@ -9,8 +9,8 @@ import {
   Animated,
 } from 'react-native';
 import {Images} from '../../assets';
-import {vh} from '../../utils/dimension';
-import {colors} from '../../theme';
+import colors from '../../utils/colors';
+import { vh } from '../../styles';
 
 const {width: screenWidth} = Dimensions.get('window');
 
@@ -81,6 +81,7 @@ const Carousel: React.FC = () => {
         data={slides}
         horizontal
         pagingEnabled
+        removeClippedSubviews={false}
         showsHorizontalScrollIndicator={false}
         onScroll={Animated.event(
           [{nativeEvent: {contentOffset: {x: scrollX}}}],
@@ -101,7 +102,11 @@ const Carousel: React.FC = () => {
         )}
         keyExtractor={item => item.id}
       />
-      
+      {/* <View style={styles.pagination}>
+        {slides.map((_, index) => (
+          <View key={index} style={[styles.dot, activeIndex === index && styles.activeDot]} />
+        ))}
+      </View> */}
       <View style={styles.pagination}>
         {slides.map((_, index) => {
           const widthAnimation = scrollX.interpolate({
