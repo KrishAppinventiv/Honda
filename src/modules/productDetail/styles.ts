@@ -105,6 +105,15 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     color: colors.black,
   },
+  cardContainer:{
+    borderColor: colors.borderLight,
+    borderWidth:1,
+    marginTop:vh(24)
+  },
+  title:{
+   fontSize:normalize(16),
+   fontWeight:'500'
+  },
   itemValue: {
     fontSize: normalize(14),
    

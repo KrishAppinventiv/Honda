@@ -132,12 +132,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 8,
     padding: 16,
-    marginBottom: 12,
-    elevation: 2,
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 2},
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
+    
+    // elevation: 2,
+    // shadowColor: '#000',
+    // shadowOffset: {width: 0, height: 2},
+    // shadowOpacity: 0.1,
+    // shadowRadius: 4,
   },
   header: {
     flexDirection: 'row',
@@ -152,7 +152,6 @@ const styles = StyleSheet.create({
   title: {
     flex: 1,
     fontSize: 18,
-    // fontWeight: 'bold',
     marginRight: 12,
   },
   rightControls: {

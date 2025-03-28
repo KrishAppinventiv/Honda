@@ -20,6 +20,7 @@ import {ScreenNames} from '../../utils/screenNames';
 import SingleExpandableList from '../../components/customAccordian';
 import colors from '../../utils/colors';
 import { vw } from '../../styles/dimensions';
+import CustomCard from '../../components/CustomCard';
 
 // Types
 interface ProductDetailPageProps {
@@ -112,7 +113,7 @@ const ProductDetailPage = ({navigation}: ProductDetailPageProps) => {
             </View>
           </View>
           <View style={styles.allExpandableContainer}>
-            <SingleExpandableList
+            {/* <SingleExpandableList
               iconSize={vw(14)}
               iconColor={colors.black}
               expandImage={Images.upArrow}
@@ -129,8 +130,30 @@ const ProductDetailPage = ({navigation}: ProductDetailPageProps) => {
                   </View>
                 ))}
               </View>
-            </SingleExpandableList>
-            <SingleExpandableList
+            </SingleExpandableList> */}
+            <CustomCard
+                title={'Specifications'}
+                description={<View style={styles.listContainer}>
+                {specifications.map(item => (
+                  <View key={item.id} style={styles.itemContainer}>
+                    <Text style={styles.itemFeature}>{item.feature}</Text>
+                    <Text style={styles.itemValue}>{item.value}</Text>
+                  </View>
+                ))}
+              </View>}
+                isExpanded={expandedIndex === 0} 
+                showAccordion={true}
+                cardStyle={styles.cardContainer}
+                expandImage={Images.expand}
+                unexpandImage={Images.unexpand}
+                iconColor={colors.lightBlack}
+                iconSize={12}
+                onAccordionPress={() => handleExpand(0)}
+                titleStyle={styles.title}
+                // titleStyle={styles.text}
+                // descriptionStyle={styles.description}
+            />
+            {/* <SingleExpandableList
              iconSize={vw(14)}
              iconColor={colors.black}
              expandImage={Images.upArrow}
@@ -148,79 +171,117 @@ const ProductDetailPage = ({navigation}: ProductDetailPageProps) => {
                   </View>
                 ))}
               </View>
-            </SingleExpandableList>
-            <SingleExpandableList
-             iconSize={vw(14)}
-             iconColor={colors.black}
-               expandImage={Images.upArrow}
-              unexpandImage={Images.downArrow}
-              title={'Salient Features'}
-              style={{borderColor: colors.borderLight}}
-              isExpanded={expandedIndex === 2}
-              onAccordionPress={() => handleExpand(2)}>
-              <View style={styles.listContainer}>
+            </SingleExpandableList> */}
+             <CustomCard
+                title={'Technology'}
+                description={<View style={styles.listContainer}>
                 {specifications.map(item => (
                   <View key={item.id} style={styles.itemContainer}>
                     <Text style={styles.itemFeature}>{item.feature}</Text>
                     <Text style={styles.itemValue}>{item.value}</Text>
                   </View>
                 ))}
-              </View>
-            </SingleExpandableList>
-            <SingleExpandableList
-             iconSize={vw(14)}
-             iconColor={colors.black}
-              expandImage={Images.upArrow}
-             unexpandImage={Images.downArrow}
-              title={'Extended Warranty of Features'}
-              style={{borderColor: colors.borderLight}}
-              isExpanded={expandedIndex === 3}
-              onAccordionPress={() => handleExpand(3)}>
-              <View style={styles.listContainer}>
+              </View>}
+                isExpanded={expandedIndex === 1} 
+                showAccordion={true}
+                cardStyle={styles.cardContainer}
+                expandImage={Images.expand}
+                unexpandImage={Images.unexpand}
+                iconColor={colors.lightBlack}
+                iconSize={12}
+                onAccordionPress={() => handleExpand(1)}
+                titleStyle={styles.title}
+                // titleStyle={styles.text}
+                // descriptionStyle={styles.description}
+            />
+           <CustomCard
+                title={'Salient Features'}
+                description={<View style={styles.listContainer}>
                 {specifications.map(item => (
                   <View key={item.id} style={styles.itemContainer}>
                     <Text style={styles.itemFeature}>{item.feature}</Text>
                     <Text style={styles.itemValue}>{item.value}</Text>
                   </View>
                 ))}
-              </View>
-            </SingleExpandableList>
-            <SingleExpandableList
-             iconSize={vw(14)}
-             iconColor={colors.black}
-               expandImage={Images.upArrow}
-              unexpandImage={Images.downArrow}
-              title={'Download Content'}
-              style={{borderColor: colors.borderLight}}
-              isExpanded={expandedIndex === 4}
-              onAccordionPress={() => handleExpand(4)}>
-              <View style={styles.listContainer}>
+              </View>}
+                isExpanded={expandedIndex === 2} 
+                showAccordion={true}
+                cardStyle={styles.cardContainer}
+                expandImage={Images.expand}
+                unexpandImage={Images.unexpand}
+                iconColor={colors.lightBlack}
+                iconSize={12}
+                onAccordionPress={() => handleExpand(2)}
+                titleStyle={styles.title}
+                // titleStyle={styles.text}
+                // descriptionStyle={styles.description}
+            />
+            <CustomCard
+                title={'Extended Warranty of Features'}
+                description={<View style={styles.listContainer}>
                 {specifications.map(item => (
                   <View key={item.id} style={styles.itemContainer}>
                     <Text style={styles.itemFeature}>{item.feature}</Text>
                     <Text style={styles.itemValue}>{item.value}</Text>
                   </View>
                 ))}
-              </View>
-            </SingleExpandableList>
-            <SingleExpandableList
-             iconSize={vw(14)}
-             iconColor={colors.black}
-               expandImage={Images.upArrow}
-              unexpandImage={Images.downArrow}
-              title={'Popular Applications'}
-              style={{borderColor: colors.borderLight}}
-              isExpanded={expandedIndex === 5}
-              onAccordionPress={() => handleExpand(5)}>
-              <View style={styles.listContainer}>
+              </View>}
+                isExpanded={expandedIndex === 3} 
+                showAccordion={true}
+                cardStyle={styles.cardContainer}
+                expandImage={Images.expand}
+                unexpandImage={Images.unexpand}
+                iconColor={colors.lightBlack}
+                iconSize={12}
+                onAccordionPress={() => handleExpand(3)}
+                titleStyle={styles.title}
+                // titleStyle={styles.text}
+                // descriptionStyle={styles.description}
+            />
+           <CustomCard
+                title={'Download Content'}
+                description={<View style={styles.listContainer}>
                 {specifications.map(item => (
                   <View key={item.id} style={styles.itemContainer}>
                     <Text style={styles.itemFeature}>{item.feature}</Text>
                     <Text style={styles.itemValue}>{item.value}</Text>
                   </View>
                 ))}
-              </View>
-            </SingleExpandableList>
+              </View>}
+                isExpanded={expandedIndex === 4} 
+                showAccordion={true}
+                cardStyle={styles.cardContainer}
+                expandImage={Images.expand}
+                unexpandImage={Images.unexpand}
+                iconColor={colors.lightBlack}
+                iconSize={12}
+                onAccordionPress={() => handleExpand(4)}
+                titleStyle={styles.title}
+                // titleStyle={styles.text}
+                // descriptionStyle={styles.description}
+            />
+            <CustomCard
+                title={'Popular Applications'}
+                description={<View style={styles.listContainer}>
+                {specifications.map(item => (
+                  <View key={item.id} style={styles.itemContainer}>
+                    <Text style={styles.itemFeature}>{item.feature}</Text>
+                    <Text style={styles.itemValue}>{item.value}</Text>
+                  </View>
+                ))}
+              </View>}
+                isExpanded={expandedIndex === 5} 
+                showAccordion={true}
+                cardStyle={styles.cardContainer}
+                expandImage={Images.expand}
+                unexpandImage={Images.unexpand}
+                iconColor={colors.lightBlack}
+                iconSize={12}
+                onAccordionPress={() => handleExpand(5)}
+                titleStyle={styles.title}
+                // titleStyle={styles.text}
+                // descriptionStyle={styles.description}
+            />
             <View style={styles.dealerContainer}>
               <Text style={styles.dealer}>{'Dealers'}</Text>
               <Text
