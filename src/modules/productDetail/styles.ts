@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors?.white,
   },
   header: {
-   // paddingVertical: vh(15),
+   paddingHorizontal: vh(16),
   },
   headerImg: {
     marginRight: vw(30),

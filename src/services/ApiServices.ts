@@ -12,7 +12,7 @@ const getServiceUrls = (env = 'DEV' || 'QA' || 'PRE-PROD') => {
         keyPrefix: 'reel-track-dev/',
         API_URL: 'https://reeldevapi.appskeeper.in/',
         //PAYMENT_URL: 'https://reelsfrontdev.appskeeper.in',
-        GOOGLE_API_KEY: 'AIzaSyCu3pQ2rxalRAWIONNcxoYST8Cy7NJrveA',
+        GOOGLE_API_KEY: '',
         CHAT_URL: 'https://reeldevapi.appskeeper.in/chat-service/reel/api/v1/',
         STRIPE_ACCESS_KEY:
           'pk_test_51PJb7IDRrAC0j318fUD6zgnGDrNOmTOk30b92buQ3vVJJ8C0Y6slxvHtn631M8zo9xTtk88nb9UzJWnDtRT1Y3Jb00TNH3BuzQ',
@@ -24,7 +24,7 @@ const getServiceUrls = (env = 'DEV' || 'QA' || 'PRE-PROD') => {
         API_URL: 'https://reelqaapi.appskeeper.in/',
         PAYMENT_URL: 'https://reelsfrontqa.appskeeper.in',
         SOCKET_URL: 'https://reelsocketqa.appskeeper.in/',
-        GOOGLE_API_KEY: 'AIzaSyCu3pQ2rxalRAWIONNcxoYST8Cy7NJrveA',
+        GOOGLE_API_KEY: '',
         CHAT_URL: 'https://reelqaapi.appskeeper.in/chat-service/reel/api/v1/',
         STRIPE_ACCESS_KEY:
           'pk_test_51PGww3LvqvtCkKqPY16skr4LBGFiVims0lQKFFobHt4wB8Geu3IALazSDOZaY4X1aEIwDngs6pMao5MXvZoiT3Xf00VWoOPn8i',

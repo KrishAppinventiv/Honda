@@ -41,10 +41,8 @@ const SignIn = () => {
   }
 
   return (
-    <KeyboardAvoidingView
-      style={styles.container}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-      <SafeAreaView style={{flex: 1}}>
+    
+      <SafeAreaView style={styles.container}>
       <CustomStatusBar />
       <CustomHeader
         headerStyle={styles.header}
@@ -95,7 +93,7 @@ const SignIn = () => {
           </Text>
         </View>
       </SafeAreaView>
-    </KeyboardAvoidingView>
+    
   );
 };
 

@@ -123,10 +123,8 @@ const VerifyOtp = () => {
   const isOtpValid = otp.join('') === '123456';
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      style={styles.container}>
-      <SafeAreaView style={{flex: 1}}>
+    
+      <SafeAreaView style={styles.container}>
       <CustomStatusBar />
       <CustomHeader
         headerStyle={styles.header}
@@ -200,7 +198,7 @@ const VerifyOtp = () => {
           icon={Images.checkmark}
         />
       </SafeAreaView>
-    </KeyboardAvoidingView>
+   
   );
 };
 
