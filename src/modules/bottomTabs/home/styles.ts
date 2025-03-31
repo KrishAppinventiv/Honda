@@ -1,6 +1,7 @@
 import {StyleSheet} from 'react-native';
-import { vh, vw } from '../../../styles';
+import { vh, vw } from '../../../styles/dimensions';
 import colors from '../../../utils/colors';
+
 
 export default StyleSheet.create({
   hiImage: {
@@ -14,25 +15,12 @@ export default StyleSheet.create({
   
   container: {
     flex: 1,
-    backgroundColor: 'white',
-  },
-  searchContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#F3F6FA',
-    borderRadius: vw(16),
-    paddingHorizontal: vw(12),
-    height:vh(52),
-    borderWidth:1,
-    borderColor:'#D4DAEA',
-    marginVertical: vh(10),
-    marginHorizontal:vh(10),
-    
+    backgroundColor: colors.white,
+    // paddingLeft:vw(16),
   },
   searchInput: {
     flex: 1,
     fontSize: vw(13),
-    
   },
   arrivalContainer:{
     paddingHorizontal: vh(12),
@@ -44,7 +32,18 @@ export default StyleSheet.create({
     marginBottom: vh(24),
     gap: vh(10),
   },
-
+  searchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#F3F6FA',
+    borderRadius: vw(16),
+    // paddingHorizontal: vw(12),
+    height:vh(52),
+    borderWidth:1,
+    borderColor:'#D4DAEA',
+    marginVertical: vh(10),
+    marginRight:vh(16),
+  },
   headerContainer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -83,13 +82,12 @@ export default StyleSheet.create({
   himage:{
     width: vw(30),
     height: vh(30),
-    marginStart:vh(10),
+     marginStart:vh(10),
     
     resizeMode: 'contain',
   },
   header: {
-    
-    paddingHorizontal:vh(16)
+   paddingHorizontal:vh(16)
   },
   headerImg: {
     marginLeft: vw(55),

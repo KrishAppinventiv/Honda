@@ -48,7 +48,12 @@ enum ScreenNames{
   ProfileScreen = 'ProfileScreen',
   RetailerScreen = 'RetailerScreen',
   RetailerFormScreen = 'RetailerFormScreen',
-  YoutubeVideoScreen = 'YoutubeVideoScreen'
+  YoutubeVideoScreen = 'YoutubeVideoScreen',
+  ContactUs = 'ContactUs',
+  EquipmentTraining = 'EquipmentTraining',
+  DownLoadContentScreen = 'DownLoadContentScreen',
+  CongratulationScreen = 'CongratulationScreen'
+
 } ;
 export {ScreenNames};
 

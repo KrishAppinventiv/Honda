@@ -37,7 +37,7 @@ const Honda_Category = ({navigation}: honda_CategoryProps) => {
     <TouchableOpacity
       style={styles.textHeaderItemContainer}
       activeOpacity={0.5}
-      onPress={() => {}}>
+      onPress={() => navigation.navigate(ScreenNames.ProductDetailPage)}>
       <View style={styles.textHeaderImageContainer}>
         <Image source={item.image} style={styles.textHeaderItemImage} />
       </View>
@@ -52,7 +52,7 @@ const Honda_Category = ({navigation}: honda_CategoryProps) => {
     <TouchableOpacity
       style={styles.textHeaderItemContainer}
       activeOpacity={0.5}
-      onPress={() => {}}>
+      onPress={() => navigation.navigate(ScreenNames.ProductDetailPage)}>
       <View style={styles.textHeaderImageContainer}>
         <Image source={item.image} style={styles.textHeaderItemImage} />
       </View>
@@ -67,7 +67,7 @@ const Honda_Category = ({navigation}: honda_CategoryProps) => {
     <TouchableOpacity
       style={styles.textHeaderItemContainer}
       activeOpacity={0.5}
-      onPress={() => {}}>
+      onPress={() => navigation.navigate(ScreenNames.ProductDetailPage)}>
       <View style={styles.textHeaderImageContainer}>
         <Image source={item.image} style={styles.textHeaderItemImage} />
       </View>
@@ -82,7 +82,7 @@ const Honda_Category = ({navigation}: honda_CategoryProps) => {
     <TouchableOpacity
       style={styles.textHeaderItemContainer}
       activeOpacity={0.5}
-      onPress={() => {}}>
+      onPress={() => navigation.navigate(ScreenNames.ProductDetailPage)}>
       <View style={styles.textHeaderImageContainer}>
         <Image source={item.image} style={styles.textHeaderItemImage} />
       </View>
@@ -103,6 +103,7 @@ const Honda_Category = ({navigation}: honda_CategoryProps) => {
         leftIconStyle={styles.backIcon}
         leftButtonStyle={styles.backButton}
         onleftPress={navigation.goBack}
+        textHeading={'Generators'}
       />
       <ScrollView
         style={styles.scrollView}
@@ -122,11 +123,10 @@ const Honda_Category = ({navigation}: honda_CategoryProps) => {
           renderItem={TillersRenderItem}
           keyExtractor={item => item.id}
           horizontal={true}
-          
           header
           headingText="Tillers"
           contentContainerStyle={styles.customFlatListStyle}
-          onSeeMorePress={() => navigation.navigate(ScreenNames.GenratorProductListing)}
+          onSeeMorePress={() => navigation.navigate(ScreenNames.ProductDetailPage)}
         />
         <CustomFlatList
           data={NewArrivalsData}
@@ -136,7 +136,7 @@ const Honda_Category = ({navigation}: honda_CategoryProps) => {
           header
           headingText="Brush Cutters"
           contentContainerStyle={styles.customFlatListStyle}
-          onSeeMorePress={() => navigation.navigate(ScreenNames.GenratorProductListing)}
+          onSeeMorePress={() => navigation.navigate(ScreenNames.ProductDetailPage)}
         />
         <CustomFlatList
           data={BestSellingProducts}
@@ -146,7 +146,7 @@ const Honda_Category = ({navigation}: honda_CategoryProps) => {
           header
           headingText="Water pumps"
           contentContainerStyle={styles.customFlatListStyle}
-          onSeeMorePress={() => navigation.navigate(ScreenNames.GenratorProductListing)}
+          onSeeMorePress={() => navigation.navigate(ScreenNames.ProductDetailPage)}
         />
       </ScrollView>
     </SafeAreaView>

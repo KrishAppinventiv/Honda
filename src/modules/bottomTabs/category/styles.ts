@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
   },
   header: {
     paddingVertical: vh(12),
+    paddingHorizontal: vw(16),
   },
   profileIcon: {
     width: vw(40),

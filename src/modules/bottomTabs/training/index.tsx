@@ -1,8 +1,10 @@
 // /* eslint-disable react/no-unstable-nested-components */
-import React, {useState} from 'react';
+import React, {ReactNode, useState} from 'react';
 import {
+  FlatList,
   Image,
   ImageSourcePropType,
+  ScrollView,
   Text,
   TouchableOpacity,
   View,
@@ -10,18 +12,21 @@ import {
 import CustomStatusBar from '../../../components/statusBar';
 import CustomHeader from '../../../components/customHeader';
 import {ScreenNames} from '../../../utils/screenNames';
-import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
 import {RootStackParamList} from '../../../utils/types';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {Images} from '../../../assets';
+import {
+  Honda,
+} from '../../../staticData';
+import SectionHeader from '../../../components/SectionHeader';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import styles from './styles';
-import { Images } from '../../../assets';
-import { Honda, HIPlus, trainingButtonData } from '../../../staticData';
-import CustomFlatList from '../../../components/CustomFlatList';
 
-interface TrainingProps {
-  navigation: BottomTabNavigationProp<RootStackParamList>;
+interface EquipmentTrainingProps {
+  navigation: NativeStackNavigationProp<RootStackParamList>;
 }
 interface Item {
+  name: ReactNode;
   id: number;
   title: string;
   image: ImageSourcePropType;
@@ -33,60 +38,41 @@ interface SimpleItem {
   title: string;
   image: ImageSourcePropType;
 }
-const GeneratorsRenderItem = ({item}: {item: SimpleItem}) => (
-  <TouchableOpacity
-    style={styles.textHeaderItemContainer}
-    activeOpacity={0.5}
-    onPress={() => {}}>
-    <View style={styles.textHeaderImageContainer}>
-      <Image source={item.image} style={styles.textHeaderItemImage} />
-    </View>
-    <Text style={styles.textHeaderItemTitle}>{item.title}</Text>
-  </TouchableOpacity>
-);
-const Training = ({navigation}: TrainingProps) => {
-  const [selected, setSelected] = useState(1);
-  const [currentData, setCurrentData] = useState(Honda);
+const Training = ({navigation}: EquipmentTrainingProps) => {
 
-  const handleButtonPress = (categoryId: React.SetStateAction<number>) => {
-    setSelected(categoryId);
+  const categories = [
+    {id: '1', name: 'Battery operated', image: Images.battery},
+    {id: '2', name: 'Generators', image: Images.tutorial1},
+    {id: '3', name: 'Tillers', image: Images.tiller},
+    {id: '4', name: 'Brush Cutters', image: Images.battery},
+    {id: '5', name: 'Water Pumps', image: Images.tutorial1},
+    {id: '6', name: 'Lawn Mowers', image: Images.tiller},
+    {id: '5', name: 'Outboard Motors', image: Images.tutorial1},
+    {id: '6', name: 'General Purp. Engines', image: Images.tiller},
+  ];
+  const category = [
+    {id: '1', name: 'Agriculture Machinery', image: Images.agriculture},
+    {id: '2', name: 'Light Construction', image: Images.machinery},
+    {id: '3', name: 'Other Categories', image: Images.other},
+  ];
 
-    switch (categoryId) {
-      case 1:
-        setCurrentData(Honda);
-        break;
-      case 2:
-        setCurrentData(HIPlus);
-        break;
-      case 3:
-        setCurrentData(Honda);
-        break;
-      case 4:
-        setCurrentData(HIPlus);
-        break;
-      default:
-        setCurrentData(Honda);
-    }
-  };
-
-  const renderItem = ({item}: {item: Item}) => (
-    <View>
-      <TouchableOpacity
-        style={[
-          styles.Button,
-          selected === item.id ? styles.selectedButton : null,
-        ]}
-        onPress={() => handleButtonPress(item.id)}>
-        <Text
-          style={[
-            styles.buttonText,
-            selected === item.id ? styles.selectedButtonText : null,
-          ]}>
-          {item.title}
-        </Text>
+  const ImageHeaderRenderItem = ({ item }: { item: Item }) => {
+  
+    const handlePress = () => {
+      if (item.name === 'Generators') {
+        navigation.navigate(ScreenNames.EquipmentTraining); // Replace 'EquipmentTraining' with your actual screen name
+      }
+    };
+  
+    return (
+      <TouchableOpacity style={styles.itemContainer} activeOpacity={0.5} onPress={handlePress}>
+        <View style={styles.imageContainer}>
+          <Image source={item.image} style={styles.itemImage} />
+        </View>
+        <Text style={styles.itemTitle}>{item.name}</Text>
       </TouchableOpacity>
-    </View>
-  );
+    );
+  };
 
   return (
     <SafeAreaView style={styles.mainContainer}>
@@ -101,22 +87,32 @@ const Training = ({navigation}: TrainingProps) => {
           navigation.navigate(ScreenNames.Notification);
         }}
       />
-      <View style={styles.choiceContainer}>
-        <CustomFlatList
-          data={trainingButtonData}
-          renderItem={renderItem}
-          keyExtractor={item => item.id}
-          horizontal={true}
-        />
-      </View>
-      <CustomFlatList
-        data={currentData}
-        renderItem={({item}) => <GeneratorsRenderItem item={item} />}
-        keyExtractor={item => item.id}
-        horizontal={false}
-        numColumns={2}
-        contentContainerStyle={styles.customFlatListStyle}
-      />
+      <ScrollView style={{flex: 1}} showsVerticalScrollIndicator={false}>
+        <View style={{flex: 1,alignItems:'center'}}>
+          <SectionHeader
+            image={Images.honda}
+            imageStyle={styles.imageStyle}
+          />
+          <FlatList
+            data={categories}
+            numColumns={3}
+            renderItem={ImageHeaderRenderItem}
+            keyExtractor={item => item.id}
+            scrollEnabled={false}
+          />
+          <SectionHeader
+            image={Images.hi}
+            imageStyle={styles.hiPlusImageStyle}
+          />
+          <FlatList
+            data={category}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            renderItem={ImageHeaderRenderItem}
+            keyExtractor={item => item.id}
+          />
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };

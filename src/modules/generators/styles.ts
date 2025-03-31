@@ -10,15 +10,18 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   header: {
-    paddingVertical: vh(10),
-    shadowColor: colors.shadowColor,
-    shadowOffset: { width: 0, height: 0.5 },
-    shadowOpacity: vw(0.2),
-    shadowRadius: 0,
-    elevation: 5, // For Android shadow
-  },
+    paddingVertical: vh(14),
+    borderBottomWidth: vw(0.5),
+    borderBottomColor: 'rgba(0, 0, 0, 0.07)',
+    shadowColor: 'rgba(255, 255, 255, 1)',
+    shadowOffset: {width: 0, height: 0.5},
+    shadowOpacity: vw(0.4),
+    elevation: 2,
+ },
   backButton: {
-    backgroundColor: colors.backButtonBackground,
+   width:vw(40),
+   height:vw(40),
+   resizeMode:'contain'
   },
   searchContainer: {
     marginHorizontal: vw(16),

@@ -17,6 +17,8 @@ import {useNavigation} from '@react-navigation/native';
 import {Dealer} from './types';
 import colors from '../../utils/colors';
 import styles from './styles';
+import CustomStatusBar from '../../components/statusBar';
+import CustomHeader from '../../components/customHeader';
 
 
 const DealerSearch = () => {
@@ -174,13 +176,15 @@ const DealerSearch = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Image source={Images.backarrow} style={styles.backButton} />
-        </TouchableOpacity>
-        <Text style={styles.headerText}>Dealers</Text>
-      </View>
-
+      <CustomStatusBar />
+      <CustomHeader
+        headerStyle={styles.header}
+        leftIcon={Images.backarrow}
+        textHeading="Locate Dealers"
+        leftButtonStyle={styles.backButton}
+        onleftPress={navigation.goBack}
+        leftIconStyle={styles.backButton}
+      />
       <View style={styles.dropdownContainer}>
         <DropDownPicker
           open={stateOpen}
@@ -264,14 +268,14 @@ const DealerSearch = () => {
                   <Text style={styles.dealerService}>{item.services}</Text>
                   <View style={styles.cardRow}>
                     <Image
-                      source={Images.location}
+                      source={Images.locationIcon}
                       style={styles.locImg}
                     />
                     <Text style={styles.dealerAddress}>{item.address}</Text>
                   </View>
                   <View style={styles.cardRow}>
                     <Image
-                      source={Images.time}
+                      source={Images.timerIcon}
                       style={styles.timeIMg}
                     />
                     <Text style={styles.dealerTime}>{item.time}</Text>
@@ -286,7 +290,7 @@ const DealerSearch = () => {
                   ]}
                   onPress={() => SetButton('Email')}>
                   <Image
-                    source={Images.email}
+                    source={Images.emailBoxDull}
                     style={[
                       styles.emailImg,
                       Button === 'Email' && {tintColor: '#E41D2D'},
@@ -307,7 +311,7 @@ const DealerSearch = () => {
                   ]}
                   onPress={() => SetButton('Call')}>
                   <Image
-                    source={Images.call}
+                    source={Images.callIconDull}
                     style={[
                       styles.callImg,
                       Button === 'Call' && {tintColor: '#E41D2D'},
@@ -328,7 +332,7 @@ const DealerSearch = () => {
                   ]}
                   onPress={() => SetButton('Direction')}>
                   <Image
-                    source={Images.direction}
+                    source={Images.directionIcon}
                     style={[
                       styles.directionImg,
                       Button === 'Direction' && {tintColor: '#E41D2D'},

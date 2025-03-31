@@ -12,20 +12,21 @@ import CustomStatusBar from '../../components/statusBar';
 import CustomSearch from '../../components/CustomSearchBar';
 import CustomButton from '../../components/CustomButton';
 import {Images} from '../../assets';
-import styles from './styles';
+
 import CustomFlatList from '../../components/CustomFlatList';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../utils/types';
 import FilterBottomSheet from '../../components/FilterBottomSheet';
 import {retailers} from '../../staticData';
 import CheckBox from 'react-native-check-box';
-import DatePicker from 'react-native-date-picker';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import {BlurView} from '@react-native-community/blur';
 import {Menu, Provider as PaperProvider} from 'react-native-paper';
 import {format, parse} from 'date-fns';
 import colors from '../../utils/colors';
-import { navigate } from '../../navigations/navigationServices';
-import { ScreenNames } from '../../utils/screenNames';
+import {navigate} from '../../navigations/navigationServices';
+import {ScreenNames} from '../../utils/screenNames';
+import styles from './styles';
 
 interface RetailerProps {
   navigation: NativeStackNavigationProp<RootStackParamList>;
@@ -49,6 +50,7 @@ const Retailer = ({navigation}: RetailerProps) => {
   );
   const [filteredRetailers, setFilteredRetailers] = useState(retailers);
   const [openPicker, setOpenPicker] = useState<'from' | 'to' | null>(null);
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const openMenu = (id: string) =>
     setVisibleMenus(prev => ({...prev, [id]: true}));
   const closeMenu = (id: string) =>
@@ -77,9 +79,9 @@ const Retailer = ({navigation}: RetailerProps) => {
     }
   };
 
-  const onAddNewRetailer = () =>{
-    navigation.navigate(ScreenNames.RetailerFormScreen)
-  }
+  const onAddNewRetailer = () => {
+    navigation.navigate(ScreenNames.RetailerFormScreen);
+  };
 
   const renderRetailer = ({item}) => (
     <View style={styles.retailerCard}>
@@ -118,13 +120,40 @@ const Retailer = ({navigation}: RetailerProps) => {
               ? styles.activeStatus
               : styles.deactiveStatus,
           ]}>
-          <Text style={item.status === 'Activated' ? styles.statusText : styles.statusTextDeactivate}>{item.status}</Text>
+          <Text
+            style={
+              item.status === 'Activated'
+                ? styles.statusText
+                : styles.statusTextDeactivate
+            }>
+            {item.status}
+          </Text>
         </View>
 
         <Text style={styles.dateText}>{item.date}</Text>
       </View>
     </View>
   );
+
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
+
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+
+  const handleConfirm = (selectedDate: Date) => {
+    setDate(selectedDate);
+    if (openPicker === 'from') {
+      setSelectedDate(prev => ({...prev, from: selectedDate}));
+    } else if (openPicker === 'to') {
+      setSelectedDate(prev => ({...prev, to: selectedDate}));
+    }
+    setOpenPicker(null);
+    hideDatePicker();
+    filterRetailers();
+  };
 
   return (
     <PaperProvider>
@@ -210,7 +239,10 @@ const Retailer = ({navigation}: RetailerProps) => {
           <Text style={styles.head}>Added on date</Text>
           <View style={styles.date}>
             <TouchableOpacity
-              onPress={() => setOpenPicker('from')}
+              onPress={() => {
+                setOpenPicker('from');
+                showDatePicker();
+              }}
               style={styles.datebox}>
               <Text style={styles.select}>
                 {selectedDate.from
@@ -221,7 +253,10 @@ const Retailer = ({navigation}: RetailerProps) => {
             </TouchableOpacity>
 
             <TouchableOpacity
-              onPress={() => setOpenPicker('to')}
+              onPress={() => {
+                setOpenPicker('to');
+                showDatePicker();
+              }}
               style={styles.datebox}>
               <Text style={styles.select}>
                 {selectedDate.to
@@ -235,31 +270,17 @@ const Retailer = ({navigation}: RetailerProps) => {
 
         {!isFilterVisible && (
           <CustomButton
-            buttonText={"ADD NEW RETAILER"}
+            buttonText={'ADD NEW RETAILER'}
             onPress={onAddNewRetailer}
             buttonStyle={styles.addButton}
           />
         )}
 
-        <DatePicker
-          modal
-          open={openPicker !== null}
-          date={date}
-          onConfirm={date => {
-            setOpen(false);
-            setDate(date);
-            if (openPicker === 'from') {
-              setSelectedDate(prev => ({...prev, from: date}));
-            } else if (openPicker === 'to') {
-              setSelectedDate(prev => ({...prev, to: date}));
-            }
-            setOpenPicker(null);
-          }}
-          onCancel={() => {
-            setOpen(false);
-            setOpenPicker(null);
-          }}
+        <DateTimePickerModal
+          isVisible={isDatePickerVisible}
           mode="date"
+          onConfirm={handleConfirm}
+          onCancel={hideDatePicker}
         />
       </SafeAreaView>
     </PaperProvider>

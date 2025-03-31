@@ -78,12 +78,7 @@ export default StyleSheet.create({
     color: colors?.red,
     fontFamily:ROBOTO_BOLD
   },
-  nextButton: {
-    width: vw(174),
-    height: vh(52),
-    backgroundColor: colors?.primary,
-    borderRadius:vh(16)
-  },
+ 
   startedButton:{
     backgroundColor: colors?.primary,
     width:'100%',
@@ -91,9 +86,61 @@ export default StyleSheet.create({
   startedButtonText:{
     fontFamily:FONTS?.ROBOTO_BOLD,
   },
+
+  buttonContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: vw(24),
+   marginBottom:vh(70)
+  },
+  nextButton: {
+    width: vw(174),
+    height: vw(52),
+    backgroundColor: colors.primary,
+    borderRadius: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   nextButtonText: {
-    fontSize:vw(16),
-    fontFamily:FONTS?.ROBOTO_BOLD
+    color: colors.white,
+    fontSize: vh(16),
+    fontFamily: ROBOTO_BOLD,
+    fontWeight: '800',
+    textAlign: 'center',
+  },
+  skipButton: {
+    width: vw(93),
+    height: vw(20),
+    marginLeft: vw(14),
+    backgroundColor: colors.white,
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+  },
+  skipButtonText: {
+    color: colors.primary,
+    fontSize: vh(16),
+    fontFamily: ROBOTO_BOLD,
+    fontWeight: '700',
+  },
+  getStartedButtonContainer: {
+    paddingHorizontal: vw(16),
+   marginBottom:vh(70)
+  },
+  getStartedButton: {
+    width: '100%',
+    height: vw(56),
+    backgroundColor: colors.primary,
+    borderRadius: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  getStartedButtonText: {
+    color: colors.white,
+    fontSize: vh(16),
+    fontFamily: ROBOTO_BOLD,
+    fontWeight: '800',
+    textAlign: 'center',
   },
 
 });

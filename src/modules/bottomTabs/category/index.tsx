@@ -50,18 +50,6 @@ const extractYouTubeVideoId = (url: string) => {
 
 
 
-
-// Memoized Item Component
-// const ImageHeaderRenderItem = React.memo(({ item }: { item: Item }) => (
-//   <TouchableOpacity style={styles.itemContainer} activeOpacity={0.5}>
-//     <View style={styles.imageContainer}>
-//       <Image source={item.image} style={styles.itemImage} />
-//     </View>
-//     <Text style={styles.itemTitle}>{item.title}</Text>
-//   </TouchableOpacity>
-// ));
-
-
 const Category = ({ navigation }: HomeProps) => {
   const [searchText, setSearchText] = useState('');
 

@@ -11,13 +11,7 @@ export default StyleSheet.create({
     header: {
       paddingVertical: vh(14),
       paddingHorizontal:vh(16),
-      borderBottomWidth: 1,
-      borderBottomColor: '#00000012',
-      shadowColor: '#00000012',
-      shadowOffset: {width: 0, height: 1},
-      shadowOpacity: 0.9,
-      shadowRadius: 14,
-      elevation: 3,
+    
     },
     backButton: {
       backgroundColor: '#F4F7FF',

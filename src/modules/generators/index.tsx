@@ -19,6 +19,7 @@ import { Images } from '../../assets';
 import CustomFlatList from '../../components/CustomFlatList';
 import CustomSearchBar from '../../components/CustomSearchBar';
 import CustomStatusBar from '../../components/statusBar';
+import { ScreenNames } from '../../utils/screenNames';
 
 interface generatorsProps {
   navigation: NativeStackNavigationProp<RootStackParamList>;
@@ -80,7 +81,7 @@ const Generators = ({navigation}: generatorsProps) => {
     <TouchableOpacity
       style={styles.textHeaderItemContainer}
       activeOpacity={0.5}
-      onPress={() => {}}>
+      onPress={() => navigation.navigate(ScreenNames.ProductDetailPage)}>
       <View style={styles.textHeaderImageContainer}>
         <Image source={item.image} style={styles.textHeaderItemImage} />
       </View>

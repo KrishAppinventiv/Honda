@@ -144,7 +144,7 @@ export default StyleSheet.create({
        flexDirection:'row',
        justifyContent:'space-between',
        borderWidth:1,
-       borderColor:colors.border,
+       borderColor:colors.borderSecond,
        borderRadius:vh(16),
        paddingHorizontal:vh(16),
        alignItems:'center'

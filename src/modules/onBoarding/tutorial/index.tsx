@@ -14,18 +14,18 @@ import {useNavigation} from '@react-navigation/native';
 import styles from './styles';
 const {width: screenWidth} = Dimensions.get('window');
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import { Images } from '../../../assets';
+import {Images} from '../../../assets';
 import colors from '../../../utils/colors';
-import { ScreenNames } from '../../../utils/screenNames';
-import { RootStackParamList } from '../../../utils/types';
+import {ScreenNames} from '../../../utils/screenNames';
+import {RootStackParamList} from '../../../utils/types';
 import Button from '../../../components/Button';
-import { FONTS } from '../../../styles';
+import {FONTS} from '../../../styles';
 // import config from '../../../../config';
 
 import CustomFlatList from '../../../components/CustomFlatList';
 import CustomStatusBar from '../../../components/statusBar';
 import CustomHeader from '../../../components/customHeader';
-
+import CustomButton from '../../../components/CustomButton';
 
 type TutorialScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -44,6 +44,7 @@ const Tutorial = () => {
   const navigation = useNavigation<TutorialScreenNavigationProp>();
 
   const scrollX = useRef(new Animated.Value(0)).current;
+  const buttonOpacity = useRef(new Animated.Value(0)).current;
 
   const banners: BannerItem[] = [
     {
@@ -65,7 +66,6 @@ const Tutorial = () => {
 
   const renderItem = ({item}: {item: BannerItem}) => (
     <View style={styles.slideContainer}>
-      
       <View style={styles.contain}>
         <Image
           source={item.img}
@@ -83,17 +83,48 @@ const Tutorial = () => {
   const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     const index = Math.round(event.nativeEvent.contentOffset.x / screenWidth);
     setActiveSlide(index);
+
+    // Animate button opacity when reaching the last slide
+    if (index === banners.length - 1) {
+      Animated.timing(buttonOpacity, {
+        toValue: 1,
+        duration: 100,
+        useNativeDriver: true,
+      }).start();
+    } else {
+      Animated.timing(buttonOpacity, {
+        toValue: 0,
+        duration: 300,
+        useNativeDriver: true,
+      }).start();
+    }
+  };
+
+  const handleNext = async () => {
+    if (activeSlide < banners.length - 1) {
+      const nextIndex = activeSlide + 1;
+      setActiveSlide(nextIndex);
+      flatListRef.current?.scrollToIndex({index: nextIndex, animated: true});
+    } else {
+      navigation.reset({
+        index: 0,
+        routes: [{name: ScreenNames.Role}],
+      });
+    }
+  };
+
+  const handleSkip = async () => {
+    navigation.reset({
+      index: 0,
+      routes: [{name: ScreenNames.Role}],
+    });
   };
 
   return (
     <View style={styles.container}>
-       <CustomStatusBar />
-      <CustomHeader
-        headerStyle={styles.header}
-        
-      />
+      <CustomStatusBar />
+      <CustomHeader headerStyle={styles.header} />
       <CustomFlatList
-        
         ref={flatListRef}
         data={banners}
         renderItem={renderItem}
@@ -146,44 +177,34 @@ const Tutorial = () => {
           );
         })}
       </View>
-      <View
-        style={[
-          styles.footer,
-          activeSlide === banners.length - 1 && {justifyContent: 'center'},
-        ]}>
-        {activeSlide !== banners.length - 1 && (
-          <Text
-            style={styles.skipText}
-            onPress={() => navigation.navigate(ScreenNames.Role)}>
-            SKIP
-          </Text>
-        )}
-        {/* <Text>{config.APP_ENV}</Text> */}
-        <Button
-          onPress={() => {
-            if (activeSlide === banners.length - 1) {
-              navigation.navigate(ScreenNames.Role);
-            } else {
-              const nextSlide = activeSlide + 1;
-              setActiveSlide(nextSlide);
-              flatListRef.current?.scrollToIndex({
-                index: nextSlide,
-                animated: true,
-              });
-            }
-          }}
-          text={activeSlide === banners.length - 1 ? 'GET STARTED' : 'NEXT'}
-          style={
-            activeSlide === banners.length - 1
-              ? styles.startedButton
-              : styles.nextButton
-          }
-          textStyle={activeSlide === banners.length - 1
-            ? styles.startedButtonText
-            : styles.nextButtonText}
-          fullWidth
-        />
-      </View>
+
+      {activeSlide === banners.length - 1 ? (
+        <Animated.View
+          style={[styles.getStartedButtonContainer, {opacity: buttonOpacity}]}>
+          <CustomButton
+            buttonText="Get Started"
+            onPress={handleNext}
+            buttonStyle={styles.getStartedButton}
+            textStyle={styles.getStartedButtonText}
+          />
+        </Animated.View>
+      ) : (
+        <View style={styles.buttonContainer}>
+          <CustomButton
+            buttonText="Skip"
+            onPress={handleSkip}
+            buttonStyle={styles.skipButton}
+            textStyle={styles.skipButtonText}
+          />
+          <CustomButton
+            buttonText="Next"
+            onPress={handleNext}
+            buttonStyle={styles.nextButton}
+            textStyle={styles.nextButtonText}
+          />
+        </View>
+      )}
+      {/* </View> */}
     </View>
   );
 };

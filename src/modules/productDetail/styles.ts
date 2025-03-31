@@ -198,12 +198,30 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primary,
   },
   buyNowButtonText: {
-    fontSize: 16,
+    fontSize: normalize(16),
     fontWeight: '800',
     color: colors.white,
   },
   leftButtonStyle:{
     backgroundColor:colors.backButtonBackground,
+  },
+  headingText:{
+    fontSize: normalize(14),
+    color: colors.lightBlack,
+    marginBottom:vh(4),
+    fontFamily:ROBOTO_MEDIUM
+  },
+  headingTextDetail:{
+    fontSize: normalize(14),
+    color: colors.contentTextColor,
+    letterSpacing:vw(0.2)
+  },
+  headingTextSecond:{
+    fontSize: normalize(14),
+    color: colors.lightBlack,
+    letterSpacing:vw(0.2),
+    fontFamily:ROBOTO_MEDIUM,
+    marginTop:vh(15)
   }
 });
 export default styles;

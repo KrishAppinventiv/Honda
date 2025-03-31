@@ -64,7 +64,7 @@ const BottomTabNavigator = () => {
         component={Category}
         name={ScreenNames.Category}
         options={{
-          tabBarLabel: 'Category',
+          tabBarLabel: 'Products',
           tabBarIcon: ({focused}) => (
             <TabIcon focused={focused} icon={Images.categoryIcon} />
           ),
@@ -97,7 +97,7 @@ const BottomTabNavigator = () => {
         component={More}
         name={ScreenNames.More}
         options={{
-          tabBarLabel: 'Profile',
+          tabBarLabel: 'More',
           tabBarIcon: ({focused}) => (
             <TabIcon focused={focused} icon={Images.moreIcon} />
           ),

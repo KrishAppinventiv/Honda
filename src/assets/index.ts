@@ -21,7 +21,7 @@ const Images = {
   promotionIcon:require('./images/promotionIcon.png'),
   trainingIcon:require('./images/trainingIcon.png'),
   moreIcon:require('./images/moreIcon.png'),
-  homeIcon:require('./images/homeIcon.png'),
+  homeIcon:require('./icons/homeTabEnable.png'),
   categoryIcon:require('./images/categoryIcon.png'),
   notification:require('./images/notification.png'),
   hi:require('./images/hi+.png'),
@@ -42,8 +42,8 @@ const Images = {
   infoIcon: require('./icons/info.png'),
   bellIcon: require('./icons/bellIcon.png'),
   hondaHqImage: require('./images/HondaHQ.png'),
-  faceBookIcon: require('./icons/FacebookIcon.png'),
-  instaGramIcon: require('./icons/instagramIcon.png'),
+  faceBookIcon: require('./icons/facebookicon.png'),
+  instaGramIcon: require('./icons/instaIcon.png'),
   expand: require('./images/expand.png'),
   unexpand:require('./images/unexpand.png'),
   sort: require('./images/sort.png'),
@@ -70,7 +70,13 @@ const Images = {
   clockIcon:  require('./icons/clockIcon.png'),
   pencilIcon:  require('./icons/pencilIcon.png'),
   dateCalanderIcon:  require('./icons/dateCalanderIcon.png'),
-  threeDotIcon: require('./icons/threeDot.png')
+  threeDotIcon: require('./icons/threeDot.png'),
+  uploadImageIcon: require('./icons/uploadImage.png'),
+  callIconDull: require('./icons/callIconDull.png'),
+  emailBoxDull: require('./icons/emailBoxDull.png'),
+  directionIcon: require('./icons/direction.png'),
+  locationIcon: require('./icons/loacationIcon.png'),
+  timerIcon: require('./icons/timerIcon.png')
 };
 
 export {Images};

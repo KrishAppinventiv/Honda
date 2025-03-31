@@ -49,6 +49,7 @@ export type RootStackParamList = {
     [ScreenNames.ProductDetailPage]:undefined
     [ScreenNames.Training]:undefined
     [ScreenNames.WebViewScreen]:{url:string}
-    [ScreenNames.RetailerFormScreen]:{}
+    [ScreenNames.RetailerFormScreen]:undefined
+    [ScreenNames.EquipmentTraining]:undefined
 
   };

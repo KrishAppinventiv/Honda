@@ -9,7 +9,8 @@ export default StyleSheet.create({
       paddingTop: vh(40),
     },
       header: {
-       
+        // // paddingVertical: Platform.OS === 'ios' ? vh(14) :vh(50),
+        // paddingVertical:vh(14)
         flexDirection: 'row',
         alignItems: 'center',
       },

@@ -1,16 +1,16 @@
 import {StyleSheet} from 'react-native';
 import colors from '../../../utils/colors';
-import { ROBOTO_MEDIUM } from '../../../styles/Fonts';
-import { normalize, vh, vw } from '../../../styles/dimensions';
+import {ROBOTO_MEDIUM} from '../../../styles/Fonts';
+import {normalize, vh, vw} from '../../../styles/dimensions';
 
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: colors.white
+    backgroundColor: colors.white,
   },
   header: {
     paddingVertical: vh(12),
-    paddingHorizontal:vh(16)
+    paddingHorizontal: vh(16),
   },
   profileIcon: {
     width: vw(40),
@@ -94,6 +94,56 @@ const styles = StyleSheet.create({
     fontFamily: ROBOTO_MEDIUM,
     marginTop: vh(18.46),
     color: colors.descritptionText,
+  },
+  listContainer: {
+    alignItems:'center',
+  },
+  itemContainer: {
+    width: vw(116),
+    height: vw(156),
+    backgroundColor: colors.white,
+    alignItems: 'center',
+    borderRadius: 12,
+    marginHorizontal:vw(8),
+    marginVertical:vh(8),
+    borderWidth: 2,
+    borderColor: colors.backButtonBackground,
+  },
+  imageContainer: {
+    width: vw(116),
+    height: vw(92),
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 12,
+    backgroundColor: colors.backButtonBackground,
+  },
+  itemImage: {
+    width: vw(100),
+    height: vw(100),
+    alignSelf: 'center',
+    resizeMode: 'contain',
+  },
+  itemTitle: {
+    fontSize: normalize(14),
+    fontFamily:ROBOTO_MEDIUM,
+    fontWeight: '500',
+    width: vw(92),
+    height: vw(40),
+    marginTop: vh(12),
+    textAlign: 'center',
+    color: colors.secondryBlack,
+  },
+  imageStyle: {
+    width: vw(99),
+    height: vw(12),
+    marginBottom:vh(12),
+    marginTop:vh(20),
+  },
+  hiPlusImageStyle:{
+    width: vw(43),
+    height: vw(30),
+    marginBottom:vh(8),
+    marginTop:vh(12),
   },
 });
 export default styles;

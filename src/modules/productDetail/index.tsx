@@ -17,10 +17,12 @@ import {RootStackParamList} from '../../utils/types';
 import styles from './styles';
 import {STRINGS} from '../../utils';
 import {ScreenNames} from '../../utils/screenNames';
-import SingleExpandableList from '../../components/customAccordian';
 import colors from '../../utils/colors';
-import { vw } from '../../styles/dimensions';
 import CustomCard from '../../components/CustomCard';
+import CustomFlatList from '../../components/CustomFlatList';
+import ProductCard from '../../components/ProductCard';
+import { vw } from '../../styles';
+import { flatListData } from '../../staticData';
 
 // Types
 interface ProductDetailPageProps {
@@ -74,6 +76,16 @@ const ProductDetailPage = ({navigation}: ProductDetailPageProps) => {
     setExpanded(!expanded);
   };
 
+  const renderItem = ({ item }: {item: Item}) => (
+    <View style={{marginRight: vw(12)}}>
+      <ProductCard item={{
+        id: item.id,
+        name: item.title,
+        image: item.image,
+      }} textAlign='center'/>
+    </View>
+  )
+
   return (
     <SafeAreaView style={styles.mainContainer}>
       <CustomStatusBar />
@@ -113,24 +125,6 @@ const ProductDetailPage = ({navigation}: ProductDetailPageProps) => {
             </View>
           </View>
           <View style={styles.allExpandableContainer}>
-            {/* <SingleExpandableList
-              iconSize={vw(14)}
-              iconColor={colors.black}
-              expandImage={Images.upArrow}
-             unexpandImage={Images.downArrow}
-              title={'Specifications'}
-              style={{borderColor: colors.borderLight}}
-              isExpanded={expandedIndex === 0}
-              onAccordionPress={() => handleExpand(0)}>
-              <View style={styles.listContainer}>
-                {specifications.map(item => (
-                  <View key={item.id} style={styles.itemContainer}>
-                    <Text style={styles.itemFeature}>{item.feature}</Text>
-                    <Text style={styles.itemValue}>{item.value}</Text>
-                  </View>
-                ))}
-              </View>
-            </SingleExpandableList> */}
             <CustomCard
                 title={'Specifications'}
                 description={<View style={styles.listContainer}>
@@ -147,40 +141,16 @@ const ProductDetailPage = ({navigation}: ProductDetailPageProps) => {
                 expandImage={Images.expand}
                 unexpandImage={Images.unexpand}
                 iconColor={colors.lightBlack}
-                iconSize={12}
+                //iconSize={}
                 onAccordionPress={() => handleExpand(0)}
                 titleStyle={styles.title}
-                // titleStyle={styles.text}
-                // descriptionStyle={styles.description}
             />
-            {/* <SingleExpandableList
-             iconSize={vw(14)}
-             iconColor={colors.black}
-             expandImage={Images.upArrow}
-            unexpandImage={Images.downArrow}
-              title={'Technology'}
-              style={{borderColor: colors.borderLight}}
-              // containerStyle={styles.singleExpandableContainer}
-              isExpanded={expandedIndex === 1}
-              onAccordionPress={() => handleExpand(1)}>
-              <View style={styles.listContainer}>
-                {specifications.map(item => (
-                  <View key={item.id} style={styles.itemContainer}>
-                    <Text style={styles.itemFeature}>{item.feature}</Text>
-                    <Text style={styles.itemValue}>{item.value}</Text>
-                  </View>
-                ))}
-              </View>
-            </SingleExpandableList> */}
              <CustomCard
                 title={'Technology'}
                 description={<View style={styles.listContainer}>
-                {specifications.map(item => (
-                  <View key={item.id} style={styles.itemContainer}>
-                    <Text style={styles.itemFeature}>{item.feature}</Text>
-                    <Text style={styles.itemValue}>{item.value}</Text>
-                  </View>
-                ))}
+                <Text style={styles.headingText}>Fuel Injection (FI) Technology</Text>
+                <Text  style={styles.headingTextDetail}>Introducing the Honda EU70is Generator, now featuring an advanced Electronic Fuel Injection system for the first time. This powerful engine is paired with advanced Electronic Fuel Injection (EFI) technology, which enhances fuel efficiency by approximately 15% and ensures compliance with stringent emissions regulations.
+                Noise levels are kept to a minimum with the EU70is’s quiet triple chamber 'low tune' muffler, which meets India’s noise regulations with a noise level of just 85.2 dB(A). Whether used in residential areas or on a job site, you can rely on the EU70is to operate quietly and efficiently.</Text>
               </View>}
                 isExpanded={expandedIndex === 1} 
                 showAccordion={true}
@@ -188,21 +158,16 @@ const ProductDetailPage = ({navigation}: ProductDetailPageProps) => {
                 expandImage={Images.expand}
                 unexpandImage={Images.unexpand}
                 iconColor={colors.lightBlack}
-                iconSize={12}
                 onAccordionPress={() => handleExpand(1)}
                 titleStyle={styles.title}
-                // titleStyle={styles.text}
-                // descriptionStyle={styles.description}
             />
            <CustomCard
                 title={'Salient Features'}
                 description={<View style={styles.listContainer}>
-                {specifications.map(item => (
-                  <View key={item.id} style={styles.itemContainer}>
-                    <Text style={styles.itemFeature}>{item.feature}</Text>
-                    <Text style={styles.itemValue}>{item.value}</Text>
-                  </View>
-                ))}
+                <Text style={styles.headingText}>Easy To Start</Text>
+                <Text  style={styles.headingTextDetail}>Experience effortless starting with the push of a button.</Text>
+                <Text style={styles.headingTextSecond}>Circuit Breaker </Text>
+                <Text  style={styles.headingTextDetail}>An inbuilt circuit breaker in the Honda EU70is generator safeguards the alternator from damage in the event of a short circuit, ensuring reliable performance and longevity.</Text>
               </View>}
                 isExpanded={expandedIndex === 2} 
                 showAccordion={true}
@@ -210,21 +175,16 @@ const ProductDetailPage = ({navigation}: ProductDetailPageProps) => {
                 expandImage={Images.expand}
                 unexpandImage={Images.unexpand}
                 iconColor={colors.lightBlack}
-                iconSize={12}
                 onAccordionPress={() => handleExpand(2)}
                 titleStyle={styles.title}
-                // titleStyle={styles.text}
-                // descriptionStyle={styles.description}
             />
             <CustomCard
-                title={'Extended Warranty of Features'}
+                title={'Special Features'}
                 description={<View style={styles.listContainer}>
-                {specifications.map(item => (
-                  <View key={item.id} style={styles.itemContainer}>
-                    <Text style={styles.itemFeature}>{item.feature}</Text>
-                    <Text style={styles.itemValue}>{item.value}</Text>
-                  </View>
-                ))}
+                <Text style={styles.headingText}>Easy To Start</Text>
+                <Text  style={styles.headingTextDetail}>Experience effortless starting with the push of a button.</Text>
+                <Text style={styles.headingTextSecond}>Circuit Breaker </Text>
+                <Text  style={styles.headingTextDetail}>An inbuilt circuit breaker in the Honda EU70is generator safeguards the alternator from damage in the event of a short circuit, ensuring reliable performance and longevity.</Text>
               </View>}
                 isExpanded={expandedIndex === 3} 
                 showAccordion={true}
@@ -232,14 +192,11 @@ const ProductDetailPage = ({navigation}: ProductDetailPageProps) => {
                 expandImage={Images.expand}
                 unexpandImage={Images.unexpand}
                 iconColor={colors.lightBlack}
-                iconSize={12}
                 onAccordionPress={() => handleExpand(3)}
                 titleStyle={styles.title}
-                // titleStyle={styles.text}
-                // descriptionStyle={styles.description}
-            />
-           <CustomCard
-                title={'Download Content'}
+            /> 
+            <CustomCard
+                title={'Extended Warranty of Features'}
                 description={<View style={styles.listContainer}>
                 {specifications.map(item => (
                   <View key={item.id} style={styles.itemContainer}>
@@ -254,14 +211,11 @@ const ProductDetailPage = ({navigation}: ProductDetailPageProps) => {
                 expandImage={Images.expand}
                 unexpandImage={Images.unexpand}
                 iconColor={colors.lightBlack}
-                iconSize={12}
                 onAccordionPress={() => handleExpand(4)}
                 titleStyle={styles.title}
-                // titleStyle={styles.text}
-                // descriptionStyle={styles.description}
             />
-            <CustomCard
-                title={'Popular Applications'}
+           <CustomCard
+                title={'Download Content'}
                 description={<View style={styles.listContainer}>
                 {specifications.map(item => (
                   <View key={item.id} style={styles.itemContainer}>
@@ -276,11 +230,25 @@ const ProductDetailPage = ({navigation}: ProductDetailPageProps) => {
                 expandImage={Images.expand}
                 unexpandImage={Images.unexpand}
                 iconColor={colors.lightBlack}
-                iconSize={12}
                 onAccordionPress={() => handleExpand(5)}
                 titleStyle={styles.title}
-                // titleStyle={styles.text}
-                // descriptionStyle={styles.description}
+            />
+            <CustomCard
+                title={'Popular Applications'}
+                description={<CustomFlatList
+                  data={flatListData}
+                  renderItem={renderItem}
+                  keyExtractor={(item) => item.id}
+                  horizontal
+                />}
+                isExpanded={expandedIndex === 6} 
+                showAccordion={true}
+                cardStyle={styles.cardContainer}
+                expandImage={Images.expand}
+                unexpandImage={Images.unexpand}
+                iconColor={colors.lightBlack}
+                onAccordionPress={() => handleExpand(6)}
+                titleStyle={styles.title}
             />
             <View style={styles.dealerContainer}>
               <Text style={styles.dealer}>{'Dealers'}</Text>

@@ -73,10 +73,10 @@ const More: React.FC<MoreScreenProps> = ({ navigation }) => {
       // Define navigation mapping
       const screenMap: { [key: string]: string } = {
           "Retailers": ScreenNames.RetailerScreen,
-          "Locate Dealer": ScreenNames.Notification,
+          "Locate Dealer": ScreenNames.DealerSearch,
           "Price List": ScreenNames.Settings,
           "Dealer Slab": ScreenNames.Settings,
-          "Download Content": ScreenNames.Settings,
+          "Download Content": ScreenNames.DownLoadContentScreen,
           "Settings": ScreenNames.Settings,
           "Logout": ScreenNames.Settings,
       };
@@ -151,11 +151,12 @@ const More: React.FC<MoreScreenProps> = ({ navigation }) => {
           <FlatList
             data={data}
             renderItem={renderItem}
-            keyExtractor={(item) => item.id}
+            keyExtractor={item => item.id}
             showsVerticalScrollIndicator={false}
             ListFooterComponent={()=><CustomSocialAccount />}
           />
         </View>
+        
       </View>
     );
 }

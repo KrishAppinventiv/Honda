@@ -14,7 +14,10 @@ export default StyleSheet.create({
     flex: 1,
     paddingTop: vh(40),
     backgroundColor: colors.white,
-    paddingHorizontal:vh(16),
+  },
+  innerContainer: {
+    flex: 1,
+    paddingHorizontal: vh(16),
   },
   HeadingContainer: {
     marginTop: vh(20),
@@ -60,6 +63,11 @@ export default StyleSheet.create({
     fontWeight: 'bold',
     color: '#333',
     marginRight: 8,
+  },
+  partition:{
+   color:colors.primary,
+   marginRight:vh(5),
+   fontSize:vh(20)
   },
   input: {
     flex: 1,

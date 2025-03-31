@@ -4,11 +4,10 @@ import {useNavigation} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import {Animated, Image, ImageBackground} from 'react-native';
 // Asset Imports
-import {Images} from '../../../assets';
+import { Images } from '../../../assets';
 // Utility Imports
 import styles from './styles';
-import {ScreenNames} from '../../../utils/screenNames';
-import CustomStatusBar from '../../../components/statusBar';
+import { ScreenNames } from '../../../utils/screenNames';
 
 // Style Imports
 
@@ -38,7 +37,6 @@ const Splash = () => {
     <Animated.View
       style={[styles.containers, {opacity: fadeAnim}]}
       testID="splash">
-      <CustomStatusBar />
       <Image source={Images.honda} style={styles.container}></Image>
     </Animated.View>
   );

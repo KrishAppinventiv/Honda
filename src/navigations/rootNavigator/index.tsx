@@ -4,7 +4,6 @@ import { ScreenNames } from '../../utils/screenNames';
 import Tutorial from '../../modules/onBoarding/tutorial';
 import Role from '../../modules/auth/role';
 import SignIn from '../../modules/auth/signin';
-import VerifyOtp from '../../modules/auth/verifyOtp';
 import BottomTabNavigator from '../bottomtab';
 import DealerSearch from '../../modules/dealerSearch';
 import Splash from '../../modules/onBoarding/splashScreen';
@@ -13,14 +12,19 @@ import Honda_Category from '../../modules/honda_Category';
 import Generators from '../../modules/generators';
 import NewArrivals from '../../modules/newArrivals';
 import Notification from '../../modules/notification';
-import Setting from '../../modules/Setting';
-import Notifications from '../../modules/Setting/screens/Notifications';
-import FAQs from '../../modules/Setting/screens/FAQs';
+import Setting from '../../modules/settings';
+import Notifications from '../../modules/settings/screens/Notifications';
+import FAQs from '../../modules/settings/screens/FAQs';
 import CustomWebView from '../../modules/WebView';
 import Profile from '../../modules/profile';
-import Retailer from '../../modules/retailer';
 import RetailerForm from '../../modules/retailerForm';
 import YouTubePlayerScreen from '../../modules/videoView';
+import ContactUs from '../../modules/settings/screens/contactUs';
+import Retailer from '../../modules/retailer';
+import VerifyOtp from '../../modules/auth/verifyOtp';
+import EquipmentTraining from '../../modules/equipmentTraining';
+import DownLoadContent from '../../modules/DownloadContent';
+import CongratulationScreen from '../../modules/congratulation';
 
 const Stack = createNativeStackNavigator();
 
@@ -128,6 +132,26 @@ const RootNavigator = () => {
        <Stack.Screen
         component={YouTubePlayerScreen}
         name={ScreenNames.YoutubeVideoScreen}
+        options={{ headerShown: false }}
+      />
+       <Stack.Screen
+        component={ContactUs}
+        name={ScreenNames.ContactUs}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        component={EquipmentTraining}
+        name={ScreenNames.EquipmentTraining}
+        options={{ headerShown: false }}
+      />
+       <Stack.Screen
+        component={DownLoadContent}
+        name={ScreenNames.DownLoadContentScreen}
+        options={{ headerShown: false }}
+      />
+       <Stack.Screen
+        component={CongratulationScreen}
+        name={ScreenNames.CongratulationScreen}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

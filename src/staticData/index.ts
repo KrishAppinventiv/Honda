@@ -42,14 +42,14 @@ import { Images } from "../assets";
       number: 'EU70is',
       title: 'Generators',
       price: '₹ 2,65,000.00',
-      image: require('../assets/images/battery.png'),
+      image: require('../assets/images/hondaGenrator.png'),
     },
     {
       id: '2',
       number: 'HRJ196',
       title: 'Lawn Mowers',
       price: '₹ 68,000.00',
-      image: require('../assets/images/battery.png'),
+      image: require('../assets/images/hivaluelogo.png'),
     },
     {
       id: '3',
@@ -87,7 +87,7 @@ import { Images } from "../assets";
       number: 'F300',
       title: 'Tillers',
       price: '₹ 58,500.00',
-      image: require('../assets/images/battery.png'),
+      image: require('../assets/images/hondaGenrator.png'),
     },
     {
       id: '2',
@@ -346,3 +346,10 @@ export const retailers = [
     date: '12/20/2025'
   },
 ];
+
+
+export const flatListData = [
+  { id: 1, title: 'Small Construction Work', image: Images.battery },
+  { id: 2, title: 'Home Usage', image: Images.battery },
+  { id: 3, title: 'Home', image: Images.battery }
+]

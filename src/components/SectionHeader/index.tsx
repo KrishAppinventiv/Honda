@@ -6,12 +6,13 @@ import colors from '../../utils/colors';
 
 interface SectionHeaderProps {
   title?: string;
-  onPress: () => void;
+  onPress?: () => void;
   image?: any;
   imageStyle?: ImageStyle;
+  seeMore?:boolean;
 }
 
-const SectionHeader: React.FC<SectionHeaderProps> = ({title, onPress, image, imageStyle}) => {
+const SectionHeader: React.FC<SectionHeaderProps> = ({title, onPress, image, imageStyle, seeMore}) => {
   return (
     <View style={styles.container}>
       {image ? (
@@ -20,12 +21,12 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({title, onPress, image, ima
         title && <Text style={styles.title}>{title}</Text>
       )}
       
-      <TouchableOpacity onPress={onPress}>
+     {seeMore && <TouchableOpacity onPress={onPress}>
         <View style={styles.seeMoreView}>
           <Text style={styles.seeMore}>See More</Text>
           <Image source={Images.right} />
         </View>
-      </TouchableOpacity>
+      </TouchableOpacity>}
     </View>
   );
 };
@@ -44,6 +45,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 10,
     marginBottom: vh(12),
+    width:'100%'
   },
   title: {
     fontSize: vh(16),

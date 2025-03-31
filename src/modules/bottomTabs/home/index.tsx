@@ -1,12 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
-  View,
-  TextInput,
   FlatList,
   ScrollView,
   Image,
-  TouchableOpacity,
-  Pressable,
 } from 'react-native';
 import styles from './styles';
 import {useNavigation} from '@react-navigation/native';
@@ -14,24 +10,33 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../../utils/types';
 import { ScreenNames } from '../../../utils/screenNames';
 import { Images } from '../../../assets';
-import Carousel from '../../../components/Carousel';
-import ProductCard from '../../../components/ProductCard';
-import SectionHeader from '../../../components/SectionHeader';
-import HiValueCard from '../../../components/valueCard';
-import { vh } from '../../../styles';
-import CustomHeader from '../../../components/customHeader';
 import CustomStatusBar from '../../../components/statusBar';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import CustomHeader from '../../../components/customHeader';
 import CustomSearch from '../../../components/CustomSearchBar';
+import Carousel from '../../../components/Carousel';
+import SectionHeader from '../../../components/SectionHeader';
+import ProductCard from '../../../components/ProductCard';
+import HiValueCard from '../../../components/valueCard';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import ShimmerLoader from '../../../components/customShimmer';
+import { screenWidth, vh } from '../../../styles/dimensions';
+import colors from '../../../utils/colors';
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
   ScreenNames.Home
 >;
-const Home: React.FC = () => {
-
+const Home = () => {
 
   const [searchTerm, setSearchTerm] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Simulate API call
+   useEffect(() => {
+  const timer = setTimeout(() => setIsLoading(false), 3000);
+  return () => clearTimeout(timer); // Cleanup on unmount
+}, []);
+
   const categories = [
     {id: '1', name: 'Battery operated Hand Tools', image: Images.battery},
     {id: '2', name: 'Generators', image: Images.tutorial1},
@@ -98,16 +103,20 @@ const Home: React.FC = () => {
    navigation.navigate(ScreenNames.Notification)
   };
 
+  const onProductPress = () =>{
+    navigation.navigate(ScreenNames.HondaCategory)
+  }
+
   const navigation = useNavigation<HomeScreenNavigationProp>();
 
   return (
     <SafeAreaView style={styles.container}>
     <CustomStatusBar />
+     {/*-------CustomHeader------*/}
     <CustomHeader
         headerStyle={styles.header}
         leftIcon={Images.hondaHqImage}
         leftButtonStyle={styles.leftButtonStyle}
-      
         leftIconStyle={styles.leftIconStyle}
         rightIcon={Images.bellIcon}
         rightButtonStyle={styles.rightButtonStyle}
@@ -115,13 +124,14 @@ const Home: React.FC = () => {
         onRightPress={onRightPress}
       />
     <ScrollView showsVerticalScrollIndicator={false}>
-
-    <CustomSearch
+      {/*-------CustomSearch------*/}
+     <CustomSearch
         placeholder="Search products"
         value={searchTerm}
         onTouchablePress={() => navigation.navigate(ScreenNames.DealerSearch)}
-        style={styles.searchContainer}
-      />
+        searchContainerStyle={styles.searchContainer}
+     />
+      {/*-------Carousel------*/}
       <Carousel />
 
       <SectionHeader
@@ -130,15 +140,24 @@ const Home: React.FC = () => {
         imageStyle={styles.imageStyle}
       />
       <FlatList
-        data={categories}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        renderItem={({item}) =><ProductCard onPress={() => navigation.navigate(ScreenNames.ProductDetailPage)} item={item} textAlign="center" />}
-        keyExtractor={item => item.id}
-        contentContainerStyle={styles.listContainer}
-        removeClippedSubviews={false}
-      />
-
+          data={isLoading ? new Array(3).fill({}) : categories}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          renderItem={({ item }) =>
+            isLoading ? (
+              <ShimmerLoader style={{width:screenWidth/3 + vh(3),
+                  height:vh(156),
+                  backgroundColor: colors.white,
+                  borderRadius: vh(8),
+                  borderWidth: 1,
+                  borderColor: colors.backButtonBackground}} />
+            ) : (
+              <ProductCard onPress={onProductPress} item={item} textAlign="center" />
+            )
+          }
+          keyExtractor={(item, index) => item?.id || index.toString()}
+          contentContainerStyle={styles.listContainer}
+        />
       {/* Categories Section */}
       <SectionHeader
         image={Images.hi}
@@ -162,6 +181,7 @@ const Home: React.FC = () => {
         title="New Arrivals"
         onPress={() => navigation.navigate(ScreenNames.newArrivals)}
         image={undefined}
+        seeMore={true}
       />
       <FlatList
         data={newArrivals}
@@ -178,6 +198,7 @@ const Home: React.FC = () => {
         title="Best Selling Products"
         onPress={() => console.log('See More Best Sellers')}
         image={undefined}
+        seeMore={true}
       />
       <FlatList
         data={bestSelling}

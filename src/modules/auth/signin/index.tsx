@@ -10,11 +10,11 @@ import {
   SafeAreaView,
 } from 'react-native';
 import styles from './styles';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../../utils/types';
-import { ScreenNames } from '../../../utils/screenNames';
-import { useNavigation } from '@react-navigation/native';
-import { Images } from '../../../assets';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {RootStackParamList} from '../../../utils/types';
+import {ScreenNames} from '../../../utils/screenNames';
+import {useNavigation, useRoute} from '@react-navigation/native';
+import {Images} from '../../../assets';
 import colors from '../../../utils/colors';
 import GlobalHeader from '../../../components/GlobalHeader';
 import Button from '../../../components/Button';
@@ -26,6 +26,8 @@ type SignNavigationProp = NativeStackNavigationProp<
   ScreenNames.Signin
 >;
 const SignIn = () => {
+  const route = useRoute();
+  const {roleName} = route.params || {roleName: 'Dealer'};
   const [phoneNumber, setPhoneNumber] = useState('');
   const [isValid, setIsValid] = useState(false);
   const navigation = useNavigation<SignNavigationProp>();
@@ -36,22 +38,24 @@ const SignIn = () => {
     setIsValid(regex.test(text));
   };
 
-  const onPressPrivacyPolicey = () =>{
-    navigation.navigate(ScreenNames.WebViewScreen,{url:'https://www.hondacarindia.com/privacy-policy'})
-  }
+  const onPressPrivacyPolicey = () => {
+    navigation.navigate(ScreenNames.WebViewScreen, {
+      url: 'https://www.hondacarindia.com/privacy-policy',
+    });
+  };
 
   return (
-    
-      <SafeAreaView style={styles.container}>
-      <CustomStatusBar />
-      <CustomHeader
-        headerStyle={styles.header}
-        leftIcon={Images.backarrow}
-        leftIconStyle={styles.backIcon}
-        onleftPress={navigation.goBack}
-      />
+    <SafeAreaView style={styles.container}>
+      <View style={styles.innerContainer}>
+        <CustomStatusBar />
+        <CustomHeader
+          headerStyle={styles.header}
+          leftIcon={Images.backarrow}
+          leftIconStyle={styles.backIcon}
+          onleftPress={navigation.goBack}
+        />
         <View style={styles.HeadingContainer}>
-          <Text style={styles.title}>Dealer Sign In</Text>
+          <Text style={styles.title}>{roleName} Sign In</Text>
           <Text style={styles.subtitle}>Please enter your phone number</Text>
         </View>
         <View
@@ -60,6 +64,7 @@ const SignIn = () => {
             !isValid && phoneNumber.length > 0 && styles.errorBorder,
           ]}>
           <Text style={styles.countryCode}>+ 91</Text>
+          <Text style={styles.partition}>|</Text>
           <TextInput
             style={styles.input}
             keyboardType="numeric"
@@ -68,6 +73,11 @@ const SignIn = () => {
             placeholderTextColor={'#999'}
             value={phoneNumber}
             onChangeText={handlePhoneChange}
+            onKeyPress={({ nativeEvent }) => {
+              if (!/^\d$/.test(nativeEvent.key)) {
+                nativeEvent.preventDefault();
+              }
+            }}
           />
         </View>
 
@@ -77,23 +87,26 @@ const SignIn = () => {
 
         <View style={styles.bottomView}>
           <Button
-           onPress={() => navigation.navigate(ScreenNames.Otp)}
-           disabled={!isValid}
-           style={[styles.button, !isValid && styles.disabledButton]}
-           text={'GET OTP'}
-           textStyle={[styles.buttonText,
-                   {color: !isValid ? colors.grey : '#fff'},
-              ]}
+            onPress={() => navigation.navigate(ScreenNames.Otp)}
+            disabled={!isValid}
+            style={[styles.button, !isValid && styles.disabledButton]}
+            text={'GET OTP'}
+            textStyle={[
+              styles.buttonText,
+              {color: !isValid ? colors.grey : '#fff'},
+            ]}
           />
 
           <Text style={styles.footerText}>
             By signing in I agree to{' '}
-            <Text onPress={onPressPrivacyPolicey} style={styles.link}>Privacy Policy</Text> &{' '}
-            <Text style={styles.link}>Terms & Conditions</Text>
+            <Text onPress={onPressPrivacyPolicey} style={styles.link}>
+              Privacy Policy
+            </Text>{' '}
+            & <Text style={styles.link}>Terms & Conditions</Text>
           </Text>
         </View>
-      </SafeAreaView>
-    
+      </View>
+    </SafeAreaView>
   );
 };
 

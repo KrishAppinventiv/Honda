@@ -26,7 +26,8 @@ export default {
     shadowColor:'#000',
     bottomTabShadow: 'rgba(220, 227, 237, 0.6)',
     borderSecond: '#D4DAEA',
-    greenText: 'rgba(32, 178, 51, 1)'
+    greenText: 'rgba(32, 178, 51, 1)',
+    contentTextColor: '#7C8585'
     
   };
   

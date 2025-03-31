@@ -15,7 +15,8 @@ type RootStackParamList = {
     Setting: undefined;
     ToggleNotifications: undefined;
     FaqScreen: undefined;
-    WebViewScreen: {url:string}
+    WebViewScreen: {url:string};
+    ContactUs: undefined
 }
 
 type SettingScreenProps = NativeStackScreenProps<RootStackParamList, 'Setting'>;
@@ -48,6 +49,11 @@ const notificationPress = () => {
       url: 'https://www.hondacarindia.com/privacy-policy',
     });
   };
+
+
+   const onContactUsPress = () =>{
+    navigation.navigate(ScreenNames.ContactUs);
+   }
   
   /**
    * Navigates to the Terms and Conditions page in a WebView
@@ -75,7 +81,14 @@ const notificationPress = () => {
     return (
         <View style={[styles.container, { paddingTop: insets.top }]}>
             <CustomStatus />
-            <CustomHeader textHeading='Settings' onleftPress={backPress} leftIcon={Images.backarrow}   leftButtonStyle={styles.imageWrapper} headerStyle={styles.header}/>
+            <CustomHeader
+            headerStyle={styles.header}
+            leftIcon={Images.backarrow}
+            textHeading="Settings"
+            leftButtonStyle={styles.backButton}
+            onleftPress={navigation.goBack}
+            leftIconStyle={styles.backButton}
+            />
             <View>
                 <Text style={styles.headerText}>Permissions</Text>
                 <CustomCard
@@ -123,6 +136,7 @@ const notificationPress = () => {
                         showAccordion={true}
                         iconColor={Colors.lightBlack}
                         iconSize={14}
+                        onAccordionPress={onContactUsPress}
                     />
                 </View>
                 <Text style={styles.headerText}>About</Text>

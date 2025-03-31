@@ -11,6 +11,11 @@ const styles = StyleSheet.create({
     header: {
         marginBottom: vh(20)
     },
+    backButton: {
+        width:vw(40),
+        height:vw(40),
+        resizeMode:'contain'
+      },
     headerText: {
         fontSize: normalize(18),
         fontWeight: 500,

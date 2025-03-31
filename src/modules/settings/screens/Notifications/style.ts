@@ -14,6 +14,11 @@ const styles = StyleSheet.create({
     header: {
         marginBottom: vh(20)
     },
+    backButton: {
+        width:vw(40),
+        height:vw(40),
+        resizeMode:'contain'
+      },
     imageWrapper: {
         width: vw(40),
         height: vh(40),

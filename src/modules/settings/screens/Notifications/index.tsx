@@ -25,7 +25,14 @@ const Notifications = ({ navigation }:NotificationScreenProps) => {
     return (
         <View style={[styles.container, { paddingTop: insets.top }]}>
             <CustomStatus />
-            <CustomHeader textHeading='Notifications' onleftPress={backPress} leftIcon={Images.backarrow}   leftButtonStyle={styles.imageWrapper} headerStyle={styles.header}/>
+            <CustomHeader
+            headerStyle={styles.header}
+            leftIcon={Images.backarrow}
+            textHeading="Notifications"
+            leftButtonStyle={styles.backButton}
+            onleftPress={navigation.goBack}
+            leftIconStyle={styles.backButton}
+            />
             <View style={styles.mainContainer}>
                 <View style={styles.mainContainer1}>
                     <View style={styles.textContainer}>

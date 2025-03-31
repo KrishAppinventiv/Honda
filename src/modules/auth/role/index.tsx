@@ -1,11 +1,19 @@
 import React from 'react';
-import {View, Text, Image, TouchableOpacity, SafeAreaView, KeyboardAvoidingView, Platform} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  SafeAreaView,
+  KeyboardAvoidingView,
+  Platform,
+} from 'react-native';
 import styles from './styles';
-import { Images } from '../../../assets';
-import { useNavigation } from '@react-navigation/native';
-import { ScreenNames } from '../../../utils/screenNames';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../../utils/types';
+import {Images} from '../../../assets';
+import {useNavigation} from '@react-navigation/native';
+import {ScreenNames} from '../../../utils/screenNames';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {RootStackParamList} from '../../../utils/types';
 import CustomHeader from '../../../components/customHeader';
 import CustomStatusBar from '../../../components/statusBar';
 
@@ -24,10 +32,7 @@ const Role = () => {
   return (
     <SafeAreaView style={styles.mainContainer}>
       <CustomStatusBar />
-      <CustomHeader
-        headerStyle={styles.header}
-        
-      />
+      <CustomHeader headerStyle={styles.header} />
 
       <View style={styles.HeadingContainer}>
         <Text style={styles.title}>Select Role</Text>
@@ -39,7 +44,9 @@ const Role = () => {
           <TouchableOpacity
             key={role.id}
             style={styles.roleCard}
-            onPress={() => navigation.navigate(ScreenNames.Signin)}>
+            onPress={() =>
+              navigation.navigate(ScreenNames.Signin, {roleName: role.name})
+            }>
             <View style={styles.iconBackground}>
               <Image source={role.icon} style={styles.roleIcon} />
             </View>
@@ -48,7 +55,7 @@ const Role = () => {
           </TouchableOpacity>
         ))}
       </View>
-      </SafeAreaView>
+    </SafeAreaView>
   );
 };
 

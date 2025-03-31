@@ -166,8 +166,8 @@ const styles = StyleSheet.create({
   content: {
     marginTop: 12,
     paddingTop: 12,
-    borderTopWidth: 1,
-    borderTopColor: '#eee',
+    // borderTopWidth: 1,
+    // borderTopColor: '#eee',
   },
   description: {
     fontSize: 14,

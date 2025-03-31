@@ -13,9 +13,9 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import CustomHeader from '../../components/customHeader';
 import CustomInput from '../../components/customInput';
-import {launchImageLibrary,launchCamera} from 'react-native-image-picker';
 import CustomStatusBar from '../../components/statusBar';
 import {validateEmail, validateName} from '../../utils/commonFunctions';
+import ImagePicker from 'react-native-image-crop-picker';
 import styles from './styles';
 import { requestCameraPermission, requestStoragePermission } from '../../components/customPermissions';
 import { RootStackParamList } from '../../utils/types';
@@ -81,60 +81,46 @@ const Profile = ({navigation}: profileProps) => {
   };
 
 
-  const openGallery = async (): Promise<void> => {
-    const storagePermission = await requestStoragePermission();
+  const openGallery =  () => {
+    ImagePicker.openPicker({
+      width: 300,
+      height: 300,
+      cropping: true,
+    })
+      .then(image => {
+        console.log(image);
+        setImageUri(image.path);
+        setModalVisible(false);
+      })
+      .catch(error => {
+        console.log('Error selecting image: ', error);
+        setModalVisible(false); 
+      });
+};
 
-    if (storagePermission) {
-      launchImageLibrary(
-        {
-          mediaType: 'photo',
-          includeBase64: false,
-          quality: 1,
-        },
-        response => {
-          if (response.didCancel) {
-            console.log('User cancelled image picker');
-          } else if (response.errorMessage) {
-            console.log('ImagePicker Error: ', response.errorMessage);
-          } else {
-            const imageUri = response.assets?.[0]?.uri;
-            if (imageUri) {
-              setModalVisible(false);
-              setImageUri(imageUri);
-            }
-          }
-        },
-      );
-    }
-  };
+const handleTakePhoto = async () => {
+  const hasPermissions = await requestCameraPermission();
 
-  // Function to open the camera
-  const handleTakePhoto = async (): Promise<void> => {
-    const cameraPermission = await requestCameraPermission();
+  if (hasPermissions) {
+    ImagePicker.openCamera({
+      width: 300,
+      height: 300,
+      cropping: true,
+    })
+      .then(image => {
+        console.log(image);
+        setImageUri(image.path);
+        setModalVisible(false);
+      })
+      .catch(error => {
+        console.log('Error taking photo: ', error);
+        setModalVisible(false);
+      });
+  } else {
+    console.log('Permission denied for camera access.');
+  }
+};
 
-    if (cameraPermission) {
-      launchCamera(
-        {
-          mediaType: 'photo',
-          includeBase64: false,
-          quality: 1,
-        },
-        response => {
-          if (response.didCancel) {
-            console.log('User cancelled image picker');
-          } else if (response.errorMessage) {
-            console.log('Camera Error: ', response.errorMessage);
-          } else {
-            const imageUri = response.assets?.[0]?.uri;
-            if (imageUri) {
-              setModalVisible(false);
-              setImageUri(imageUri);
-            }
-          }
-        },
-      );
-    }
-  };
 
   const handleRemove = () => {
     setModalVisible(false);

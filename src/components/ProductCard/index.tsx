@@ -1,34 +1,38 @@
-import React from 'react';
-import { View, Text, Image, StyleSheet, Dimensions, Pressable, TouchableOpacity } from 'react-native';
+import React, { useMemo } from 'react';
+import { View, Text, Image, StyleSheet, Dimensions, TouchableOpacity, ImageProps } from 'react-native';
 import { vh } from '../../styles';
 import colors from '../../utils/colors';
-const {width: screenWidth} = Dimensions.get('window');
+
+const { width: screenWidth } = Dimensions.get('window');
+
 interface ProductProps {
   item: {
     id: string;
     name: string;
     price?: string;
     categoryName?: string;
-    image: any;
-    onPress?: any
+    image: ImageProps;
   };
   textAlign?: 'left' | 'center' | 'right';
+  onPress?: () => void;
 }
 
-const ProductCard: React.FC<ProductProps> = ({ item, textAlign,onPress }) => {
+const ProductCard = React.memo(({ item, textAlign = 'left', onPress }: ProductProps) => {
+  const cardHeight = useMemo(() => (item.categoryName ? vh(183) : vh(168)), [item.categoryName]);
+
   return (
-    <TouchableOpacity onPress={onPress} style={[styles.card,item.categoryName && {height:vh(193),width:screenWidth/3 + vh(3)}]}>
+    <TouchableOpacity onPress={onPress} style={[styles.card, { height: cardHeight }]}> 
       <View style={styles.greyView}>
         <Image source={item.image} style={styles.image} />
       </View>
-      <View style={{ paddingVertical: vh(10) }}>
+      <View style={styles.textContainer}>
         <Text style={[styles.name, { textAlign }]}>{item.name}</Text>
         {item.categoryName && <Text style={[styles.category, { textAlign }]}>{item.categoryName}</Text>}
         {item.price && <Text style={[styles.price, { textAlign }]}>{item.price}</Text>}
       </View>
     </TouchableOpacity>
   );
-};
+});
 
 export default ProductCard;
 
@@ -41,8 +45,7 @@ const styles = StyleSheet.create({
     borderRadius: vh(8),
   },
   card: {
-    width:screenWidth/3 - vh(15),
-    height:vh(168),
+    width: screenWidth / 3 + vh(3),
     backgroundColor: colors.white,
     borderRadius: vh(8),
     borderWidth: 1,
@@ -53,24 +56,26 @@ const styles = StyleSheet.create({
     height: vh(100),
     resizeMode: 'contain',
   },
+  textContainer: {
+    paddingVertical: vh(10),
+  },
   name: {
     fontSize: vh(14),
     fontWeight: '500',
-   
-    marginStart:vh(5)
+    marginStart: vh(5),
   },
   category: {
     fontSize: vh(13),
     fontWeight: '400',
     color: 'gray',
-    marginTop: vh(2),
-    marginStart:vh(5)
+    marginTop: 2,
+    marginStart: vh(5),
   },
   price: {
     fontSize: vh(13),
     color: colors.black,
-    fontWeight:'600',
+    fontWeight: '600',
     marginTop: vh(5),
-    marginStart:vh(5)
+    marginStart: vh(5),
   },
 });
