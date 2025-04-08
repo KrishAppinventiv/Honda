@@ -11,9 +11,6 @@ interface HiValueCardProps {
 const HiValueCard: React.FC<HiValueCardProps> = ({ onPress }) => {
   return (
     <View style={styles.container}>
-     
-   
-
       {/* Main Content */}
       <View style={styles.content}>
         <Image source={Images.hivaluelogo} style={styles.productImage} />
@@ -37,8 +34,8 @@ export default HiValueCard;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'black',
-    borderRadius: vw(10),
+    backgroundColor: '#2C2C2C',
+    borderRadius: vw(16),
     padding: vw(10),
     marginVertical: vh(10),
     marginHorizontal:vh(12)
@@ -54,8 +51,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   productImage: {
-    width: vw(80),
-    height: vh(80),
+    width: vw(120),
+    height: vw(120),
     resizeMode: 'contain',
   },
   textContainer: {

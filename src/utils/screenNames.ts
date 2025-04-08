@@ -52,7 +52,10 @@ enum ScreenNames{
   ContactUs = 'ContactUs',
   EquipmentTraining = 'EquipmentTraining',
   DownLoadContentScreen = 'DownLoadContentScreen',
-  CongratulationScreen = 'CongratulationScreen'
+  CongratulationScreen = 'CongratulationScreen',
+  CustomerSupportScreen = 'CustomerSupportScreen',
+  modelCalculator = 'modelCalculator',
+  engineScreenName= 'engineScreenName'
 
 } ;
 export {ScreenNames};

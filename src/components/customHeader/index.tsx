@@ -6,8 +6,11 @@ import {
   ImageSourcePropType,
   Text,
 } from 'react-native';
-import {Images} from '../../assets';
 import styles from './styles';
+import { Images } from '../../assets';
+
+
+
 
 interface HeaderProps {
   headerStyle?: object;
@@ -21,6 +24,10 @@ interface HeaderProps {
   onRightPress?: () => void;
   rightButtonStyle?: object;
   rightIconStyle?: object;
+  rightTextStyle?: object;
+  imageViewStyle?:object;
+  rightText?: string;
+  headerIcon?: ImageSourcePropType;
 }
 
 const CustomHeader = ({
@@ -32,9 +39,13 @@ const CustomHeader = ({
   headerImgStyle,
   textHeading,
   rightIcon,
+  rightText,
+  rightTextStyle,
   onRightPress,
   rightButtonStyle,
   rightIconStyle,
+  imageViewStyle,
+  headerIcon,
 }: HeaderProps) => {
   return (
     <View style={[styles.header, headerStyle]}>
@@ -47,12 +58,13 @@ const CustomHeader = ({
         )}
       </TouchableOpacity>
       {/* Logo */}
-      <View style={{alignItems: 'center'}}>
+      <View style={[styles.imageView,imageViewStyle]}>
         <Image
-          source={Images.honda}
+          source={headerIcon ? headerIcon : Images.honda}
           style={[styles.headerImg, headerImgStyle]}
         />
         {textHeading && <Text style={styles.textHeading}>{textHeading}</Text>}
+        
       </View>
 
       {/* Right Button */}
@@ -64,6 +76,9 @@ const CustomHeader = ({
             source={rightIcon}
             style={[styles.rightIcon, rightIconStyle]}
           />
+        )}
+        {rightText && (
+          <Text style={[styles.rightText,rightTextStyle]}>{rightText}</Text>
         )}
       </TouchableOpacity>
     </View>

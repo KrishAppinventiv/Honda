@@ -15,9 +15,6 @@ import {ScreenNames} from '../../../utils/screenNames';
 import {RootStackParamList} from '../../../utils/types';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {Images} from '../../../assets';
-import {
-  Honda,
-} from '../../../staticData';
 import SectionHeader from '../../../components/SectionHeader';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import styles from './styles';

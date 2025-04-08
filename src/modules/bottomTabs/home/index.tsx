@@ -3,6 +3,7 @@ import {
   FlatList,
   ScrollView,
   Image,
+  View,
 } from 'react-native';
 import styles from './styles';
 import {useNavigation} from '@react-navigation/native';
@@ -19,7 +20,7 @@ import ProductCard from '../../../components/ProductCard';
 import HiValueCard from '../../../components/valueCard';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import ShimmerLoader from '../../../components/customShimmer';
-import { screenWidth, vh } from '../../../styles/dimensions';
+import { screenWidth, vh, vw } from '../../../styles/dimensions';
 import colors from '../../../utils/colors';
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<
@@ -38,9 +39,13 @@ const Home = () => {
 }, []);
 
   const categories = [
-    {id: '1', name: 'Battery operated Hand Tools', image: Images.battery},
-    {id: '2', name: 'Generators', image: Images.tutorial1},
-    {id: '3', name: 'Tillers', image: Images.tiller},
+    {id: '1', name: 'Generators', image: Images.genratorSetImage},
+    {id: '2', name: 'Water Pump', image: Images.waterPumpImage},
+    {id: '3', name: 'Honda Marine', image: Images.hondaMarineSmall},
+    {id: '4', name: 'Engines', image: Images.engineSmall},
+    {id: '5', name: 'Agri & Garden', image: Images.agriculture},
+    {id: '6', name: 'Battery Operated', image: Images.battery},
+    
   ];
 
   const category = [
@@ -103,9 +108,36 @@ const Home = () => {
    navigation.navigate(ScreenNames.Notification)
   };
 
-  const onProductPress = () =>{
-    navigation.navigate(ScreenNames.HondaCategory)
-  }
+  // const onProductPress = () =>{
+  //   navigation.navigate(ScreenNames.HondaCategory)
+  // }
+
+
+  const onProductPress = (item) => {
+    switch (item.name) {
+      case 'Generators':
+        navigation.navigate(ScreenNames.GenratorProductListing,{screenName:'Genrators'});
+        break;
+      case 'Water Pump':
+        navigation.navigate(ScreenNames.GenratorProductListing,{screenName:'Water Pumps'});
+        break;
+      case 'Honda Marine':
+        navigation.navigate(ScreenNames.GenratorProductListing,{screenName:'Honda Marine'});
+        break;
+      case 'Engines':
+        navigation.navigate(ScreenNames.newArrivals,{screenName:'Engines'});
+        break;
+      case 'Agri & Garden':
+        navigation.navigate(ScreenNames.HondaCategory);
+        break;
+      case 'Battery Operated':
+        navigation.navigate(ScreenNames.newArrivals,{screenName:'Battery Operated hand Tools'});
+        break;
+      default:
+        console.warn('No screen defined for this category');
+        break;
+    }
+  };  
 
   const navigation = useNavigation<HomeScreenNavigationProp>();
 
@@ -128,35 +160,41 @@ const Home = () => {
      <CustomSearch
         placeholder="Search products"
         value={searchTerm}
-        onTouchablePress={() => navigation.navigate(ScreenNames.DealerSearch)}
+        onTouchablePress={() => navigation.navigate(ScreenNames.Search)}
         searchContainerStyle={styles.searchContainer}
      />
       {/*-------Carousel------*/}
-      <Carousel />
-
+      <Carousel headerStyle={{marginTop:vh(5)}}/>
       <SectionHeader
         image={Images.honda}
-        onPress={() => navigation.navigate(ScreenNames.HondaCategory)}
+        // onPress={() => navigation.navigate(ScreenNames.HondaCategory)}
         imageStyle={styles.imageStyle}
       />
       <FlatList
-          data={isLoading ? new Array(3).fill({}) : categories}
-          horizontal
+          data={isLoading ? new Array(6).fill({}) : categories}
+          numColumns={3}
           showsHorizontalScrollIndicator={false}
           renderItem={({ item }) =>
             isLoading ? (
-              <ShimmerLoader style={{width:screenWidth/3 + vh(3),
-                  height:vh(156),
-                  backgroundColor: colors.white,
-                  borderRadius: vh(8),
-                  borderWidth: 1,
-                  borderColor: colors.backButtonBackground}} />
+              <ShimmerLoader style={{
+                width: screenWidth / 3 - vh(12),
+                height: vh(156),
+                backgroundColor: colors.white,
+                borderRadius: vh(8),
+                borderWidth: 1,
+                borderColor: colors.backButtonBackground,
+                margin: vh(6),
+                }} 
+                  />
             ) : (
-              <ProductCard onPress={onProductPress} item={item} textAlign="center" />
+              <ProductCard extraCardStyle={styles.extraCardStyle} onPress={()=>onProductPress(item)} item={item} textAlign="center" />
             )
           }
           keyExtractor={(item, index) => item?.id || index.toString()}
           contentContainerStyle={styles.listContainer}
+          columnWrapperStyle={{
+            justifyContent: 'space-between', // evenly spread 3 items
+          }}
         />
       {/* Categories Section */}
       <SectionHeader
@@ -168,12 +206,12 @@ const Home = () => {
         data={category}
         horizontal
         showsHorizontalScrollIndicator={false}
-        renderItem={({item}) => <ProductCard item={item} textAlign="center" />}
+        renderItem={({item}) => <ProductCard extraCardStyle={styles.extraCardStyle} item={item} textAlign="center" />}
         keyExtractor={item => item.id}
-        contentContainerStyle={styles.listContainer}
+        contentContainerStyle={styles.listContainerHiPlus}
         removeClippedSubviews={false}
       />
-      <Image source={Images.hi} style={styles.himage} />
+      <Image source={Images.hiValuePlusImage} style={styles.himage} />
       <HiValueCard onPress={() => console.log('Check Now Clicked')} />
 
       {/* New Arrivals Section */}
@@ -182,12 +220,13 @@ const Home = () => {
         onPress={() => navigation.navigate(ScreenNames.newArrivals)}
         image={undefined}
         seeMore={true}
+        titleStyle={styles.newArrivalText}
       />
       <FlatList
         data={newArrivals}
         horizontal
         showsHorizontalScrollIndicator={false}
-        renderItem={({item}) => <ProductCard item={item} />}
+        renderItem={({item}) => <ProductCard item={item} extraCardStyle={{borderWidth:vw(0)}}/>}
         keyExtractor={item => item.id}
         contentContainerStyle={styles.arrivalContainer}
         removeClippedSubviews={false}
@@ -204,7 +243,7 @@ const Home = () => {
         data={bestSelling}
         horizontal
         showsHorizontalScrollIndicator={false}
-        renderItem={({item}) => <ProductCard item={item} />}
+        renderItem={({item}) => <ProductCard extraCardStyle={{borderWidth:vw(0)}} item={item} />}
         keyExtractor={item => item.id}
         contentContainerStyle={styles.listContainer}
         removeClippedSubviews={false}

@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, ListRenderItemInfo } from 'react-native'
+import { View, ListRenderItemInfo } from 'react-native'
 import React, { useState } from 'react'
 import styles from './style'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
@@ -26,7 +26,7 @@ const data: DataItem[] = [
     { id: 3, title: 'Do I need any thing special to use?', description: 'Terms of service are the legal agreements between a service provider and a person who wants to use that service. The person must agree to abide by the terms of service in order to use the offered service. Terms of service can also be merely a disclaimer, especially regarding the use of websitesTerms of service are the legal agreements between a service provider and a person who wants to use that service. The person must agree to abide by the terms of service in order to use the offered service. Terms of service can also be merely a disclaimer, especially regarding the use of websitesTerms of service are the legal agreements between a service provider and a person who wants to use that service. The person must agree to abide by the terms of service in order to use the offered service. Terms of service can also be merely a disclaimer, especially regarding the use of websitesTerms of ' }
 ]
 
-type FaqsScreenProps = NativeStackScreenProps<RootStackParamList, 'FAQs'>;
+type FaqsScreenProps = NativeStackScreenProps<RootStackParamList>;
 
 const FAQs: React.FC<FaqsScreenProps> = ({ navigation }) => {
     const insets = useSafeAreaInsets();
@@ -51,7 +51,7 @@ const FAQs: React.FC<FaqsScreenProps> = ({ navigation }) => {
                 expandImage={Images.expand}
                 unexpandImage={Images.unexpand}
                 iconColor={Colors.lightBlack}
-                iconSize={12}
+                iconSize={15}
                 onAccordionPress={() => toggleExpand(item.id)}
                 titleStyle={styles.text}
                 descriptionStyle={styles.description}
@@ -61,7 +61,7 @@ const FAQs: React.FC<FaqsScreenProps> = ({ navigation }) => {
     return (
         <View style={[styles.container, { paddingTop: insets.top }]}>
             <CustomStatus />
-            <CustomHeader textHeading='FAQs' onleftPress={backPress} leftIcon={Images.backarrow}  leftButtonStyle={styles.imageWrapper} headerStyle={styles.header}/>
+            <CustomHeader textHeading='FAQs' onleftPress={backPress} leftIcon={Images.backarrow}  leftButtonStyle={styles.imageWrapper} headerStyle={styles.header} leftIconStyle={styles.imageWrapper}/>
             <CustomFlatList
                 data={data}
                 renderItem={renderItem}

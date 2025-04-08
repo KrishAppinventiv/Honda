@@ -4,6 +4,12 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
+    <!-- For accessing Videos -->
+     <uses-permission android:name="android.permission.READ_MEDIA_VIDEO"/>
+     <!-- For accessing Audio files -->
+     <uses-permission android:name="android.permission.READ_MEDIA_AUDIO"/>
+   
 
     <application
         android:name=".MainApplication"

@@ -27,7 +27,7 @@ export default StyleSheet.create({
   },
   contain:{justifyContent: 'center', alignItems: 'center', flex: 0.9},
 
-  headView:{marginHorizontal: vh(30)},
+  headView:{marginHorizontal: vh(20)},
   hondaText: {
     fontSize: vw(22),
     fontWeight: 'bold',
@@ -40,24 +40,25 @@ export default StyleSheet.create({
     height: vw(340),
   },
   head: {
-    fontSize: vw(18),
-    fontWeight: 'bold',
+    fontSize: vw(22),
+    fontFamily: FONTS.ROBOTO_BOLD,
     textAlign: 'center',
     marginTop: vh(15),
   },
   description: {
-    fontSize: vw(14),
+    fontSize: vw(16),
     textAlign: 'center',
-    color: 'gray',
+    color: colors.descritptionText,
     marginHorizontal: vw(20),
     marginTop: vh(5),
-    width:vw(290)
+    width:vw(353),
+    letterSpacing:0
   },
   dot: {
-    height: 8,
-    borderRadius: 4,
-    backgroundColor: '#ccc',
-    marginHorizontal: 4,
+    height: vh(8),
+    borderRadius: vw(4),
+    backgroundColor: colors.borderSecond,
+    marginHorizontal: vw(4),
   },
   pagination: {
     flexDirection: 'row',
@@ -75,8 +76,8 @@ export default StyleSheet.create({
   },
   skipText: {
     fontSize: vw(16),
-    color: colors?.red,
-    fontFamily:ROBOTO_BOLD
+    color: colors.primary,
+    fontFamily:ROBOTO_BOLD,
   },
  
   startedButton:{
@@ -92,13 +93,13 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: vw(24),
-   marginBottom:vh(70)
+    marginBottom:vh(70)
   },
   nextButton: {
     width: vw(174),
     height: vw(52),
     backgroundColor: colors.primary,
-    borderRadius: 16,
+    borderRadius: vw(16),
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -106,8 +107,8 @@ export default StyleSheet.create({
     color: colors.white,
     fontSize: vh(16),
     fontFamily: ROBOTO_BOLD,
-    fontWeight: '800',
     textAlign: 'center',
+    letterSpacing:vw(0.4)
   },
   skipButton: {
     width: vw(93),

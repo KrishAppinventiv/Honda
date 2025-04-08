@@ -15,7 +15,6 @@ import Notification from '../../modules/notification';
 import Setting from '../../modules/settings';
 import Notifications from '../../modules/settings/screens/Notifications';
 import FAQs from '../../modules/settings/screens/FAQs';
-import CustomWebView from '../../modules/WebView';
 import Profile from '../../modules/profile';
 import RetailerForm from '../../modules/retailerForm';
 import YouTubePlayerScreen from '../../modules/videoView';
@@ -25,6 +24,11 @@ import VerifyOtp from '../../modules/auth/verifyOtp';
 import EquipmentTraining from '../../modules/equipmentTraining';
 import DownLoadContent from '../../modules/DownloadContent';
 import CongratulationScreen from '../../modules/congratulation';
+import modelCalculator from '../../modules/modelCalculator';
+import CustomerSupport from '../../modules/settings/screens/customerSupport';
+import WebView from '../../modules/WebView';
+import Engines from '../../modules/engines';
+import Search from '../../modules/search';
 
 const Stack = createNativeStackNavigator();
 
@@ -110,7 +114,7 @@ const RootNavigator = () => {
         options={{ headerShown: false }}
       />
         <Stack.Screen
-        component={CustomWebView}
+        component={WebView}
         name={ScreenNames.WebViewScreen}
         options={{ headerShown: false }}
       />
@@ -152,6 +156,26 @@ const RootNavigator = () => {
        <Stack.Screen
         component={CongratulationScreen}
         name={ScreenNames.CongratulationScreen}
+        options={{ headerShown: false }}
+      />
+       <Stack.Screen
+        component={CustomerSupport}
+        name={ScreenNames.CustomerSupportScreen}
+        options={{ headerShown: false }}
+      />
+       <Stack.Screen
+        component={modelCalculator}
+        name={ScreenNames.modelCalculator}
+        options={{ headerShown: false }}
+      />
+        <Stack.Screen
+        component={Engines}
+        name={ScreenNames.engineScreenName}
+        options={{ headerShown: false }}
+      />
+       <Stack.Screen
+        component={Search}
+        name={ScreenNames.Search}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

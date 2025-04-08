@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native";
 import colors from "../../utils/colors";
 import { normalize, vh, vw } from "../../styles/dimensions";
+import { FONTS } from "../../styles";
 
 const styles = StyleSheet.create({
     container: {
@@ -68,7 +69,8 @@ const styles = StyleSheet.create({
     },
     titleInside: {
         fontSize: normalize(14),
-        fontWeight: 500,
+        fontFamily:FONTS.ROBOTO_REGULAR,
+        fontWeight:'500',
         color: colors.lightBlack
     }
 })

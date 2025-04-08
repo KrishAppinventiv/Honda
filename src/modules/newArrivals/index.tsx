@@ -2,17 +2,13 @@
 import {
   Image,
   ImageSourcePropType,
-  StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
-
 import {RootStackParamList} from '../../utils/types';
-
-import GlobalHeader from '../../components/GlobalHeader';
 import {Images} from '../../assets';
 
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
@@ -27,7 +23,9 @@ import SortBottomSheet from '../../components/sortBottomSheet';
 import SingleExpandableList from '../../components/customAccordian';
 import CheckBox from 'react-native-check-box';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
-import { screenWidth } from '../../styles';
+import { screenWidth, vw } from '../../styles';
+import { useRoute } from '@react-navigation/native';
+import CustomHeader from '../../components/customHeader';
 
 interface NewArrivalsProps {
   navigation: NativeStackNavigationProp<RootStackParamList>;
@@ -51,6 +49,14 @@ const NewArrivals = ({navigation}: NewArrivalsProps) => {
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
   const [categoriesExpanded, setCategoriesExpanded] = useState(false);
   const [sortOrder, setSortOrder] = useState<string>('');
+
+    let routes = useRoute();
+    const {screenName} = routes?.params
+    
+      useEffect(() => {
+        console.log('Received screenName:', screenName);
+      }, [screenName]);
+  
 
   const toggleFilter = () => {
     setFilterVisible(!isFilterVisible);
@@ -127,16 +133,15 @@ const NewArrivals = ({navigation}: NewArrivalsProps) => {
 
   return (
     <SafeAreaView style={[styles.mainContainer]}>
-      <GlobalHeader
+     <CustomHeader
         headerStyle={styles.header}
-        leftButton
-        rightButton
-        leftIcon={Images.back}
-        textHeading="New Arrivals"
+        leftIcon={Images.backarrow}
+        textHeading={screenName === 'Honda Marine' ? '' : screenName}
         leftButtonStyle={styles.backButton}
         onleftPress={navigation.goBack}
+        leftIconStyle={styles.backButton}
+        headerIcon={screenName === 'Honda Marine' ? Images.hondaMarineLogo : Images.honda}
       />
-
       {(isFilterVisible || isSortVisible) && (
         <BlurView
           style={styles.absolute}

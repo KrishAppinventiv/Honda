@@ -12,7 +12,8 @@ const styles = StyleSheet.create({
         paddingHorizontal: vw(16)
     },
     header: {
-        marginBottom: vw(20)
+        marginBottom: vw(20),
+        paddingHorizontal: 0
     },
     backButton: {
         width:vw(40),

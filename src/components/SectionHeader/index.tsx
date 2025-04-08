@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, StyleSheet, Image, ImageStyle} from 'react-native';
+import {View, Text, TouchableOpacity, StyleSheet, Image, ImageStyle, ViewStyle} from 'react-native';
 import { Images } from '../../assets';
 import { vh } from '../../styles';
 import colors from '../../utils/colors';
@@ -10,15 +10,16 @@ interface SectionHeaderProps {
   image?: any;
   imageStyle?: ImageStyle;
   seeMore?:boolean;
+  titleStyle?:ViewStyle;
 }
 
-const SectionHeader: React.FC<SectionHeaderProps> = ({title, onPress, image, imageStyle, seeMore}) => {
+const SectionHeader: React.FC<SectionHeaderProps> = ({title, onPress, image, imageStyle, seeMore,titleStyle}) => {
   return (
     <View style={styles.container}>
       {image ? (
         <Image source={image} style={[styles.image, imageStyle]} />
       ) : (
-        title && <Text style={styles.title}>{title}</Text>
+        title && <Text style={[styles.title,titleStyle]}>{title}</Text>
       )}
       
      {seeMore && <TouchableOpacity onPress={onPress}>

@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     fontSize: normalize(18),
     fontFamily: ROBOTO_MEDIUM,
     color: colors.secondryBlack,
-    marginTop: vh(8),
+    // marginTop: vh(8),
   },
   rightButton: {
     width: vw(40),
@@ -47,10 +47,18 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     backgroundColor: colors.white,
   },
+  imageView:{
+    alignItems:'center',
+    rowGap: vh(8)
+  },
   rightIcon: {
     width: vw(24),
     height: vw(24),
     resizeMode: 'contain',
   },
+  rightText:{
+    fontSize:normalize(14),
+    fontWeight:'400'
+  }
 });
 export default styles;

@@ -39,6 +39,7 @@ interface CustomFlatListProps<T> {
   onSeeMorePress?: () => void;
   scrollEnabled?: boolean;
   listHeaderComponent?: React.ComponentType<any> | React.ReactElement | null;
+  columnWrapperStyle?: ViewStyle;
 }
 
 const CustomFlatList = forwardRef<FlatList, CustomFlatListProps<any>>(
@@ -66,6 +67,7 @@ const CustomFlatList = forwardRef<FlatList, CustomFlatListProps<any>>(
       onSeeMorePress,
       scrollEnabled = true,
       listHeaderComponent,
+      columnWrapperStyle
     },
     ref,
   ) => {
@@ -118,6 +120,7 @@ const CustomFlatList = forwardRef<FlatList, CustomFlatListProps<any>>(
           onScroll={onScroll}
           onMomentumScrollEnd={onMomentumScrollEnd}
           ListHeaderComponent={listHeaderComponent}
+          columnWrapperStyle={columnWrapperStyle}
         />
       </View>
     );

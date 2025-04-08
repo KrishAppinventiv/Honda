@@ -2,7 +2,6 @@ import {
   Dimensions,
   FlatList,
   Image,
-  StyleSheet,
   Text,
   View,
   Animated,
@@ -14,18 +13,15 @@ import {useNavigation} from '@react-navigation/native';
 import styles from './styles';
 const {width: screenWidth} = Dimensions.get('window');
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {Images} from '../../../assets';
 import colors from '../../../utils/colors';
 import {ScreenNames} from '../../../utils/screenNames';
 import {RootStackParamList} from '../../../utils/types';
-import Button from '../../../components/Button';
-import {FONTS} from '../../../styles';
 // import config from '../../../../config';
-
 import CustomFlatList from '../../../components/CustomFlatList';
 import CustomStatusBar from '../../../components/statusBar';
 import CustomHeader from '../../../components/customHeader';
 import CustomButton from '../../../components/CustomButton';
+import { banners } from '../../../staticData';
 
 type TutorialScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -45,24 +41,6 @@ const Tutorial = () => {
 
   const scrollX = useRef(new Animated.Value(0)).current;
   const buttonOpacity = useRef(new Animated.Value(0)).current;
-
-  const banners: BannerItem[] = [
-    {
-      img: Images.tutorial1,
-      text: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-      head: 'Lorem ipsum dolor sit amet, consectetur adipiscing',
-    },
-    {
-      img: Images.tutorial2,
-      text: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-      head: 'Lorem ipsum dolor sit amet, consectetur adipiscing',
-    },
-    {
-      img: Images.tutorial3,
-      text: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-      head: 'Lorem ipsum dolor sit amet, consectetur adipiscing',
-    },
-  ];
 
   const renderItem = ({item}: {item: BannerItem}) => (
     <View style={styles.slideContainer}>
@@ -191,13 +169,13 @@ const Tutorial = () => {
       ) : (
         <View style={styles.buttonContainer}>
           <CustomButton
-            buttonText="Skip"
+            buttonText={"SKIP"}
             onPress={handleSkip}
             buttonStyle={styles.skipButton}
             textStyle={styles.skipButtonText}
           />
           <CustomButton
-            buttonText="Next"
+            buttonText={"NEXT"}
             onPress={handleNext}
             buttonStyle={styles.nextButton}
             textStyle={styles.nextButtonText}

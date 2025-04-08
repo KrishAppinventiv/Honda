@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import { vh, vw } from '../../../styles/dimensions';
+import { screenWidth, vh, vw } from '../../../styles/dimensions';
 import colors from '../../../utils/colors';
 
 
@@ -7,10 +7,13 @@ export default StyleSheet.create({
   hiImage: {
     width: vh(40),
     height: vh(40),
+    paddingLeft:vw(5)
   },
   imageStyle: {
-    width: vh(80),
-    height: vh(50),
+     width: vw(99),
+     height: vw(12),
+     paddingLeft:vw(6),
+     marginTop:vh(0)
   },
   
   container: {
@@ -28,21 +31,19 @@ export default StyleSheet.create({
     gap: vh(10),
   },
   listContainer: {
-    paddingHorizontal: vh(12),
     marginBottom: vh(24),
-    gap: vh(10),
+    gap: vw(16),
+    marginTop:vh(12),
+    paddingHorizontal: vh(16),
+    paddingBottom: vh(0),
+  },
+  listContainerHiPlus: {
+    gap: vw(16),
+    paddingHorizontal: vh(16),
+    paddingBottom: vh(12),
   },
   searchContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#F3F6FA',
-    borderRadius: vw(16),
-    // paddingHorizontal: vw(12),
-    height:vh(52),
-    borderWidth:1,
-    borderColor:'#D4DAEA',
-    marginVertical: vh(10),
-    marginRight:vh(16),
+   
   },
   headerContainer: {
     flexDirection: 'row',
@@ -80,14 +81,13 @@ export default StyleSheet.create({
     resizeMode: 'contain',
   },
   himage:{
-    width: vw(30),
+    width: vw(63),
     height: vh(30),
-     marginStart:vh(10),
-    
+    marginStart:vh(10),
     resizeMode: 'contain',
   },
   header: {
-   paddingHorizontal:vh(16)
+    paddingHorizontal:vh(16)
   },
   headerImg: {
     marginLeft: vw(55),
@@ -102,5 +102,16 @@ export default StyleSheet.create({
   },
   rightButtonStyle:{
     backgroundColor:colors.backButtonBackground,
+  },
+  extraCardStyle:{
+     width:vw(116),
+        backgroundColor: colors.white,
+        borderRadius: vh(8),
+        borderWidth: vw(2),
+        borderColor: colors.backButtonBackground,
+        height:vw(156)
+  },
+  newArrivalText:{
+    paddingLeft:vw(10)
   }
 });

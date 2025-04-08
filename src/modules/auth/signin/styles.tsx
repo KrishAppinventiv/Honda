@@ -1,5 +1,5 @@
 import {Platform, StyleSheet} from 'react-native';
-import {FONTS, normalize, vh, vw} from '../../../styles';
+import {FONTS, normalize, screenWidth, vh, vw} from '../../../styles';
 import colors from '../../../utils/colors';
 
 export default StyleSheet.create({
@@ -35,7 +35,7 @@ export default StyleSheet.create({
   },
   title: {
     fontSize: vh(26),
-    fontWeight: '900',
+    fontFamily:FONTS?.ROBOTO_BLACK
   },
   subtitle: {
     fontSize: vh(16),
@@ -46,14 +46,13 @@ export default StyleSheet.create({
   },
   header: {
     flexDirection: 'row',
-    alignItems: 'center',
   },
   inputContainer: {
     flexDirection: 'row',
     borderWidth: vw(1),
     borderColor: 'red',
     borderRadius: vw(16),
-    paddingVertical: vh(5),
+    height:vw(56),
     paddingHorizontal: vw(10),
     alignItems: 'center',
     marginTop: vh(5),
@@ -64,10 +63,10 @@ export default StyleSheet.create({
     color: '#333',
     marginRight: 8,
   },
-  partition:{
-   color:colors.primary,
-   marginRight:vh(5),
-   fontSize:vh(20)
+  partition: {
+    color: colors.primary,
+    marginRight: vh(5),
+    fontSize: vh(20),
   },
   input: {
     flex: 1,
@@ -87,9 +86,10 @@ export default StyleSheet.create({
     paddingVertical: 15,
     borderRadius: vh(15),
     alignItems: 'center',
+    width: screenWidth - vh(32),
   },
   disabledButton: {
-    backgroundColor: '#ddd',
+    backgroundColor: colors.backButtonBackground,
   },
   buttonText: {
     fontSize: normalize(16),
@@ -104,6 +104,8 @@ export default StyleSheet.create({
   link: {
     color: colors.black,
     fontWeight: 'bold',
+    textDecorationLine: 'underline',
+    textDecorationColor: colors.black,
   },
   backIcon: {
     width: vw(40),

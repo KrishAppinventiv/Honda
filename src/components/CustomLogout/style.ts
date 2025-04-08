@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     },
     content: {
         width: vw(364),
-        padding: 20,
+        padding: 24,
         backgroundColor: Colors.white,
         borderRadius: 16,
         alignItems: 'center',
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         alignSelf: 'center',
-        marginTop: vh(35),
+        marginTop: vh(24),
         width: vw(154),
         paddingVertical: vh(16),
         borderRadius: 5,
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
         borderColor: Colors.black,
     },
     text: {
-        color: Colors.black,
+        color: Colors.lightGreyBlue,
         fontSize: 15,
         fontWeight: 'bold'
     }

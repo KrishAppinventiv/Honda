@@ -75,8 +75,7 @@ export default StyleSheet.create({
     resizeMode: 'contain',
   },
   header: {
-    paddingVertical: vh(10),
-    paddingHorizontal: vw(16),
+    paddingHorizontal:vw(16)
   },
   headerImg: {
     marginLeft: vw(55),

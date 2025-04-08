@@ -43,12 +43,12 @@ export type RootStackParamList = {
       selectedUser?: CustomContact; 
     };
     
-    [ScreenNames.Search]: { contacts: CustomContact[] };  
+    [ScreenNames.Search]: undefined;  
     [ScreenNames.Chat]: { roomId: string; selectedUser: CustomContact }; 
     [ScreenNames.GroupChatting]: { roomId: string }; 
     [ScreenNames.ProductDetailPage]:undefined
     [ScreenNames.Training]:undefined
-    [ScreenNames.WebViewScreen]:{url:string}
+    [ScreenNames.WebViewScreen]:{url:undefined}
     [ScreenNames.RetailerFormScreen]:undefined
     [ScreenNames.EquipmentTraining]:undefined
 

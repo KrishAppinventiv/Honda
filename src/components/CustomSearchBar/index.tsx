@@ -19,30 +19,36 @@ interface CustomSearchBarProps extends TextInputProps {
   onSearchPress?: () => void;
   onTouchablePress?: () => void;
   searchContainerStyle?: object;
+  value?: string;
+  onChangeText?: (text: string) => void;
 }
 
 const CustomSearch: React.FC<CustomSearchBarProps> = ({
   placeholder,
-  onSearchPress,
-  searchContainerStyle,
   onTouchablePress,
+  searchContainerStyle,
+  value,
+  onChangeText,
 }) => {
   return (
     <View>
-      <TouchableOpacity style={[styles.searchContainer, searchContainerStyle]} onPress={onTouchablePress}>
-      
+      <TouchableOpacity
+        style={[styles.searchContainer, searchContainerStyle]}
+         onPress={onTouchablePress} activeOpacity={onTouchablePress?.5:1}>
         <Image source={Images.search} style={styles.searchIcon} />
-      
-      <TextInput
-        style={styles.searchInput}
-        placeholder={placeholder}
-        selectionColor={colors.inActiveTab}
-        placeholderTextColor={colors.inActiveTab}
-      />
+        <TextInput
+          style={styles.searchInput}
+          placeholder={placeholder}
+          selectionColor={colors.inActiveTab}
+          placeholderTextColor={colors.inActiveTab}
+          value={value} // <-- Make input controlled
+          onChangeText={onChangeText} // <-- Handle input change
+        />
       </TouchableOpacity>
     </View>
   );
 };
+
 
 
 

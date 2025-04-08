@@ -10,13 +10,13 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   header: {
-    paddingVertical: vh(14),
     borderBottomWidth: vw(0.5),
     borderBottomColor: 'rgba(0, 0, 0, 0.07)',
     shadowColor: 'rgba(255, 255, 255, 1)',
     shadowOffset: {width: 0, height: 0.5},
     shadowOpacity: vw(0.4),
     elevation: 2,
+    paddingHorizontal:vw(16)
  },
   backButton: {
    width:vw(40),
@@ -24,7 +24,8 @@ const styles = StyleSheet.create({
    resizeMode:'contain'
   },
   searchContainer: {
-    marginHorizontal: vw(16),
+    //marginHorizontal: vw(16),
+    width:vw(315),
   },
   choiceContainer: {
     marginTop: vh(10),
@@ -111,5 +112,15 @@ const styles = StyleSheet.create({
     marginTop: vh(8),
     color: colors.secondryBlack,
   },
+  searchHeader:{
+    flexDirection:'row',
+    alignItems:'center',
+    justifyContent:'space-between',
+  },
+  calculatorImage:{
+   marginTop:vh(20),marginRight:vw(14),
+   height:vw(56),
+   width:vw(56)
+  }
 });
 export default styles;

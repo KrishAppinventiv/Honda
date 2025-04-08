@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
-import { View, Text, Image, StyleSheet, Dimensions, TouchableOpacity, ImageProps } from 'react-native';
-import { vh } from '../../styles';
+import { View, Text, Image, StyleSheet, Dimensions, TouchableOpacity, ImageProps, ViewStyle } from 'react-native';
+import { FONTS, vh, vw } from '../../styles';
 import colors from '../../utils/colors';
 
 const { width: screenWidth } = Dimensions.get('window');
@@ -15,13 +15,14 @@ interface ProductProps {
   };
   textAlign?: 'left' | 'center' | 'right';
   onPress?: () => void;
+  extraCardStyle?: ViewStyle;
 }
 
-const ProductCard = React.memo(({ item, textAlign = 'left', onPress }: ProductProps) => {
+const ProductCard = React.memo(({ item, textAlign = 'left', onPress,extraCardStyle }: ProductProps) => {
   const cardHeight = useMemo(() => (item.categoryName ? vh(183) : vh(168)), [item.categoryName]);
 
   return (
-    <TouchableOpacity onPress={onPress} style={[styles.card, { height: cardHeight }]}> 
+    <TouchableOpacity onPress={onPress} style={[styles.card,extraCardStyle, { height: cardHeight }]}> 
       <View style={styles.greyView}>
         <Image source={item.image} style={styles.image} />
       </View>
@@ -41,14 +42,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#F3F6FA',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingBottom: vh(10),
+    height:vh(94),
     borderRadius: vh(8),
   },
   card: {
     width: screenWidth / 3 + vh(3),
     backgroundColor: colors.white,
     borderRadius: vh(8),
-    borderWidth: 1,
+    borderWidth: vw(2),
     borderColor: colors.backButtonBackground,
   },
   image: {
@@ -57,16 +58,19 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   textContainer: {
-    paddingVertical: vh(10),
+    flex:1,
+    justifyContent:'center',
+    alignContent:'center',
+    width:vw(92)
   },
   name: {
     fontSize: vh(14),
-    fontWeight: '500',
+    fontFamily:FONTS.ROBOTO_MEDIUM,
     marginStart: vh(5),
   },
   category: {
     fontSize: vh(13),
-    fontWeight: '400',
+    fontFamily:FONTS.ROBOTO_MEDIUM,
     color: 'gray',
     marginTop: 2,
     marginStart: vh(5),

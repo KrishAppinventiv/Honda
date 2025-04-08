@@ -12,7 +12,8 @@ const styles = StyleSheet.create({
         paddingBottom: vh(20)
     },
     header: {
-        marginBottom: vh(20)
+        marginBottom: vh(20),
+        paddingHorizontal: 0
     },
     backButton: {
         width:vw(40),
@@ -48,8 +49,8 @@ const styles = StyleSheet.create({
         fontWeight: 400
     },
     icon: {
-        width: vw(8),
-        height: vh(8),
+        width: vw(12),
+        height: vh(12),
         tintColor: '#8CA2B4'
     },
     buttonContainer: { backgroundColor: Colors.primary, paddingVertical: vh(15), width: '100%',borderRadius:vw(16) },

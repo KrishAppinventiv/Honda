@@ -5,59 +5,19 @@ import { authAction } from '../Redux/Slices/authslice';
 import { CommonFunctions } from '../utils';
 import { ReducerModal } from '../modals';
 
-const getServiceUrls = (env = 'DEV' || 'QA' || 'PRE-PROD') => {
+const getServiceUrls = (env = 'DEV') => {
   switch (env) {
     case 'DEV':
       return {
-        keyPrefix: 'reel-track-dev/',
-        API_URL: 'https://reeldevapi.appskeeper.in/',
-        //PAYMENT_URL: 'https://reelsfrontdev.appskeeper.in',
+        // keyPrefix: 'reel-track-dev/',
+        API_URL: '3003',
         GOOGLE_API_KEY: '',
-        CHAT_URL: 'https://reeldevapi.appskeeper.in/chat-service/reel/api/v1/',
-        STRIPE_ACCESS_KEY:
-          'pk_test_51PJb7IDRrAC0j318fUD6zgnGDrNOmTOk30b92buQ3vVJJ8C0Y6slxvHtn631M8zo9xTtk88nb9UzJWnDtRT1Y3Jb00TNH3BuzQ',
-        RISKVENDORID: '65a8d83d0589760c005b899b',
       };
-    case 'QA':
-      return {
-        keyPrefix: 'reel-track-dev/',
-        API_URL: 'https://reelqaapi.appskeeper.in/',
-        PAYMENT_URL: 'https://reelsfrontqa.appskeeper.in',
-        SOCKET_URL: 'https://reelsocketqa.appskeeper.in/',
-        GOOGLE_API_KEY: '',
-        CHAT_URL: 'https://reelqaapi.appskeeper.in/chat-service/reel/api/v1/',
-        STRIPE_ACCESS_KEY:
-          'pk_test_51PGww3LvqvtCkKqPY16skr4LBGFiVims0lQKFFobHt4wB8Geu3IALazSDOZaY4X1aEIwDngs6pMao5MXvZoiT3Xf00VWoOPn8i',
-        RISKVENDORID: '65b19a912d85aa1743592ac0',
-      };
-    case 'PRE-PROD':
-      return {
-        keyPrefix: '',
-        API_URL: 'https://pre-api.reeltrak.com/',
-        SOCKET_URL: 'https://pre-socket.reeltrak.com/',
-        PAYMENT_URL: 'https://pre-vendor.reeltrak.com/',
-        CHAT_URL: 'https://pre-api.reeltrak.com/chat-service/reel/api/v1',
-        GOOGLE_API_KEY: '',
-        STRIPE_ACCESS_KEY:
-          'pk_test_51PSzkaEEel0k1TJH1pMh6VjKjdGV4DhUxECUAGNe6fZgf5ypcm1R1e7PHoAtIAguxIlOnQ1fnyJYdI00vJaI9Ejg00Pr8OPgyj',
-        RISKVENDORID: '65d167e9aa14894f25f288cf',
-      };
-    default:
-      return {
-        keyPrefix: '',
-        API_URL: 'https://reeldevapi.appskeeper.in/',
-        SOCKET_URL: 'https://reelsocketdev.appskeeper.in/',
-        CHAT_URL: 'https://reeldevapi.appskeeper.in/chat-service/reel/api/v1/',
-        PAYMENT_URL: 'https://reelsfrontdev.appskeeper.in',
-        GOOGLE_API_KEY: '',
-        STRIPE_ACCESS_KEY:
-          'pk_test_51PJb7IDRrAC0j318fUD6zgnGDrNOmTOk30b92buQ3vVJJ8C0Y6slxvHtn631M8zo9xTtk88nb9UzJWnDtRT1Y3Jb00TNH3BuzQ',
-        RISKVENDORID: '65b19a912d85aa1743592ac0',
-      };
+    
   }
 };
 
-export const SERVICE_URLS = getServiceUrls('PRE-PROD');
+export const SERVICE_URLS = getServiceUrls('DEV');
 /**f
  * setup axios instance
  */
@@ -66,11 +26,11 @@ const ApiRequest = axios.create({
   timeout: 30000,
   headers: {
     language: 'en',
-    API_KEY: '1234',
+    server_key: 'C6GRh7CX1k3x6n4ahVTrjDKS918psPby',
     accept: 'application/json',
     'Content-Type': 'application/json',
     offset: new Date().getTimezoneOffset() * 60 * 1000,
-    authorization: 'Basic cmVlbDpyZWVsQDEyMw==',
+    authorization: 'Basic aG9uZGEyMDI1OmhvbmRhQDIwMjU=',
     platform: Platform.OS === 'android' ? '1' : '2',
     timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
   },

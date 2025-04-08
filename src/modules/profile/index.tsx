@@ -295,6 +295,7 @@ const handleTakePhoto = async () => {
             </TouchableOpacity>
           </View>
           <FlatList
+            removeClippedSubviews={false}
             data={days}
             renderItem={renderItem}
             keyExtractor={(item, index) => index.toString()}

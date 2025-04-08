@@ -268,21 +268,20 @@ export const HIPlus = [
     link: 'https://www.youtube.com/watch?v=kiBmE10ZR8Y&ab_channel=HondaIndiaPowerProductsLimited'
   },
 ];
-
 export const Honda = [
   {
     id: '1',
     title: 'Battery operated Hand Tools',
     image: Images.dummyFile,
     type: 'file',
-    link: ''
+    link: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'
   },
   {
     id: '2',
     title: 'Generators',
     image: Images.dummyFile,
     type: 'file',
-     link: ''
+     link: 'https://www.africau.edu/images/default/sample.pdf'
   },
   {
     id: '3',
@@ -296,7 +295,7 @@ export const Honda = [
     title: 'Battery operated Hand Tools',
     image: Images.dummyFile,
     type: 'file',
-    link: ''
+    link: 'https://www.africau.edu/images/default/sample.pdf'
   },
   {
     id: '5',
@@ -310,7 +309,7 @@ export const Honda = [
     title: 'Tilers',
     image: Images.dummyFile,
     type: 'file',
-    link: ''
+    link: 'https://www.africau.edu/images/default/sample.pdf'
   },
 ];
 
@@ -353,3 +352,124 @@ export const flatListData = [
   { id: 2, title: 'Home Usage', image: Images.battery },
   { id: 3, title: 'Home', image: Images.battery }
 ]
+
+
+
+ export const banners: BannerItem[] = [
+    {
+      img: Images.tutorial1,
+      text: 'Experience Honda’s advanced power, designed for efficiency, durability, and performance in every situation.',
+      head: 'Reliable Power',
+    },
+    {
+      img: Images.tutorial2,
+      text: 'Get seamless service and support for your Honda power products with authorized dealers and quick assistance at your fingertips.',
+      head: 'Easy & Hassle-Free Service',
+    },
+    {
+      img: Images.tutorial3,
+      text: 'Browse, compare, and purchase genuine Honda power equipment effortlessly with a smooth and secure online experience.',
+      head: 'Smart & Convenient Shopping',
+    },
+  ];
+
+
+
+  export const allGenrator = [
+    {
+      id: '1',
+      number: 'EU70is',
+      price: '₹ 2,65,000.00',
+      image: Images.tutorial1,
+      title: 'Generators',
+    },
+
+    {
+      id: '2',
+      number: 'HRJ196',
+      price: '₹ 68,000.00',
+      image: Images.ep1000Series,
+      title: 'Generators',
+    },
+    {
+      id: '3',
+      number: 'EU70is',
+      price: '₹ 36,500.00',
+      image: Images.eu30ISeries,
+      title: 'Generators',
+    },
+    {
+        id: '4',
+        number: 'EU70is',
+        price: '₹ 2,65,000.00',
+        image: Images.eu30ISeries,
+        title: 'Generators',
+      },
+      {
+        id: '5',
+        number: 'EX200S',
+        price: '₹ 68,000.00',
+        image: Images.silentGenratorSeries,
+        title: 'Generators',
+      },
+      {
+        id: '6',
+        number: 'EX200S',
+        price: '₹ 36,500.00',
+        image: Images.silentGenratorSeries,
+        title: 'Generators',
+      },
+  ];
+
+  export const Inverter = [
+    {
+      id: '1',
+      number: 'EU70is',
+      price: '₹ 2,65,000.00',
+      image: Images.tutorial1,
+      title: 'Inverter',
+    },
+
+    {
+      id: '2',
+      number: 'HRJ196',
+      price: '₹ 68,000.00',
+      image: Images.ep1000Series,
+      title: 'Inverter',
+    },
+    {
+      id: '3',
+      number: 'EU70is',
+      price: '₹ 36,500.00',
+      image: Images.eu30ISeries,
+      title: 'Inverter',
+    },
+  ];
+
+  export const HandySeries = [
+    {
+      id: '1',
+      number: 'EP 1000',
+      price: '₹ 2,65,000.00',
+      image: Images.ep1000Series,
+      title: 'Genrators',
+    },
+  ];
+
+
+  export const silentSeris = [
+    {
+      id: '5',
+      number: 'EX200S',
+      price: '₹ 68,000.00',
+      image: Images.silentGenratorSeries,
+      title: 'Generators',
+    },
+    {
+      id: '6',
+      number: 'EX200S',
+      price: '₹ 36,500.00',
+      image: Images.silentGenratorSeries,
+      title: 'Generators',
+    },
+  ];

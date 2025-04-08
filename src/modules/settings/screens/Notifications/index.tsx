@@ -14,7 +14,7 @@ type RootStackParamList = {
     Notifications: undefined;
 }
 
-type NotificationScreenProps = NativeStackScreenProps<RootStackParamList, 'Notifications'>;
+type NotificationScreenProps = NativeStackScreenProps<RootStackParamList>;
 
 const Notifications = ({ navigation }:NotificationScreenProps) => {
     const insets = useSafeAreaInsets();
@@ -55,18 +55,7 @@ const Notifications = ({ navigation }:NotificationScreenProps) => {
                         circleBorderWidth={4}
                         circleBorderInactiveColor={'#D4DAEA'}
                         circleBorderActiveColor={'#20B233'}
-                        switchWidthMultiplier={2}
-                    />
-                </View>
-                <View>
-                    <CustomButton
-                        buttonText ={'UPDATE'}
-                        onPress={() => { }}
-                        isButtonDisabled={!isEnabled}
-                        style={styles.buttonContainer}
-                        textStyle={styles.text}
-                        disabledButtonStyle={styles.buttonDisabled}
-                        disabledButtonTextStyle={styles.textDisabled}
+                        switchWidthMultiplier={1.4}
                     />
                 </View>
             </View>

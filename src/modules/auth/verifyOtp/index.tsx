@@ -9,15 +9,13 @@ import {
   Platform,
 } from 'react-native';
 import React, {useState, useRef, useEffect} from 'react';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import {useNavigation} from '@react-navigation/native';
+import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../../utils/types';
 import {ScreenNames} from '../../../utils/screenNames';
 import {Images} from '../../../assets';
-import CustomModal from '../../../components/CustomModal';
 import colors from '../../../utils/colors';
-import GlobalHeader from '../../../components/GlobalHeader';
 import CustomButton from '../../../components/CustomButton';
 import CustomStatusBar from '../../../components/statusBar';
 import CustomHeader from '../../../components/customHeader';
@@ -28,6 +26,8 @@ type VerifyOtpProp = NativeStackNavigationProp<
 >;
 const VerifyOtp = () => {
   const navigation = useNavigation<VerifyOtpProp>();
+  const route = useRoute();
+  const { phoneNumber } = route.params || { phoneNumber: '' };
   const [otp, setOtp] = useState<string[]>(['', '', '', '', '', '']);
   const [isValid, setIsValid] = useState<boolean[]>([
     true,
@@ -37,13 +37,13 @@ const VerifyOtp = () => {
     true,
     true,
   ]);
-  const inputRefs = useRef<(TextInput | null)[]>([]); 
+  const inputRefs = useRef<(TextInput | null)[]>([]);
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [attempts, setAttempts] = useState<number>(2);
   const [successModal, setSuccessModal] = useState<boolean>(false);
   const [timer, setTimer] = useState<number>(59);
   const [isTimerExpired, setIsTimerExpired] = useState<boolean>(false);
-
+  const insets = useSafeAreaInsets();
   useEffect(() => {
     inputRefs.current[0]?.focus();
   }, []);
@@ -95,16 +95,14 @@ const VerifyOtp = () => {
   const handleSubmit = () => {
     if (isTimerExpired) {
       setErrorMessage('The OTP has expired. Please request a new one.');
-      if(otp.join('') === '123456'){
+      if (otp.join('') === '123456') {
         setSuccessModal(true);
         setTimeout(() => {
-         
           navigation.reset({index: 0, routes: [{name: ScreenNames.BottomTab}]});
         }, 1000);
       }
     } else if (otp.join('') === '123456') {
-      
-     navigation.navigate(ScreenNames.CongratulationScreen)
+      navigation.navigate(ScreenNames.CongratulationScreen);
     } else {
       setAttempts(prev => prev - 1);
       setErrorMessage('Invalid OTP. Please enter a valid 6-digit code.');
@@ -121,7 +119,7 @@ const VerifyOtp = () => {
   const isOtpValid = otp.every(digit => digit.match(/^\d$/));
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={[styles.container, {paddingTop: insets.top}]}>
       <CustomStatusBar />
       <CustomHeader
         headerStyle={styles.header}
@@ -132,9 +130,9 @@ const VerifyOtp = () => {
       <View style={styles.textContainer}>
         <Text style={styles.title}>Verify Phone Number</Text>
         <Text style={styles.subtitle}>
-          Enter the code sent to number 7838235606.
+          Enter the code sent to number {phoneNumber}
         </Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
           <Text style={styles.changeNumber}>Change Number?</Text>
         </TouchableOpacity>
       </View>
@@ -175,16 +173,16 @@ const VerifyOtp = () => {
 
       <View style={styles.bottomView}>
         <CustomButton
-          buttonText="Verify"
+          buttonText="VERIFY"
           onPress={handleSubmit}
           isButtonDisabled={!isOtpValid}
           buttonStyle={styles.button}
           disabledButtonStyle={styles.disabledButton}
           textStyle={styles.buttonText}
-          disabledButtonTextStyle={{color: '#656565'}}
+          disabledButtonTextStyle={{color: colors.descritptionText}}
         />
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 

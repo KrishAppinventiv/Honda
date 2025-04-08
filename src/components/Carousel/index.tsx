@@ -7,10 +7,11 @@ import {
   Dimensions,
   StyleSheet,
   Animated,
+  ViewStyle,
 } from 'react-native';
 import {Images} from '../../assets';
 import colors from '../../utils/colors';
-import { vh } from '../../styles';
+import { vh, vw } from '../../styles';
 
 const {width: screenWidth} = Dimensions.get('window');
 
@@ -52,7 +53,7 @@ const slides: Slide[] = [
   },
 ];
 
-const Carousel: React.FC = () => {
+const Carousel = ({ headerStyle }: { headerStyle?: ViewStyle }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const scrollX = useRef(new Animated.Value(0)).current;
   const flatListRef = useRef<FlatList<Slide>>(null);
@@ -75,7 +76,7 @@ const Carousel: React.FC = () => {
   };
 
   return (
-    <View>
+    <View style={headerStyle}>
       <FlatList
         ref={flatListRef}
         data={slides}
@@ -125,7 +126,7 @@ const Carousel: React.FC = () => {
               screenWidth * index,
               screenWidth * (index + 1),
             ],
-            outputRange: ['#ccc', colors.primary, '#ccc'],
+            outputRange: [colors.borderSecond, colors.primary, colors.borderSecond],
             extrapolate: 'clamp',
           });
 
@@ -151,13 +152,14 @@ export default Carousel;
 
 const styles = StyleSheet.create({
   slide: {
-    height: vh(160),
-    width: vh(320),
+    height: vw(160),
+    width: vw(320),
     alignItems: 'center',
-    borderRadius: 10,
-    marginVertical: 10,
-    marginHorizontal: vh(8),
+    borderRadius: vw(16),
+    marginVertical: vh(10),
+    marginHorizontal: vh(16),
     flexDirection: 'row',
+    marginRight:vw(0)
   },
   title: {
     fontSize: 18,
@@ -180,12 +182,12 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   dot: {
-    height: 8,
-    borderRadius: 4,
+    height: vh(8),
+    borderRadius: vw(4),
     backgroundColor: '#ddd',
     marginHorizontal: vh(4),
   },
   activeDot: {
-    backgroundColor: '#E74C3C',
+    backgroundColor: colors.primary,
   },
 });

@@ -1,19 +1,18 @@
-import { View, Text, Platform, TouchableOpacity, Image, Modal, ScrollView, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, FlatList, ImageSourcePropType, GestureResponderEvent, ListRenderItemInfo } from 'react-native'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { useEffect, useState } from 'react';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import styles from './style';
-import CustomStatus from '../../../../components/CustomStatus';
-
-
-import colors from '../../../../utils/colors';
-import CustomButton from '../../../../components/CustomButton';
+import { Dimensions, FlatList, GestureResponderEvent, Image, ImageSourcePropType, Keyboard, Modal, Platform, ScrollView, Text, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Images } from '../../../../assets';
+import CustomButton from '../../../../components/CustomButton';
 import CustomFlatList from '../../../../components/CustomFlatList';
 import CustomHeader from '../../../../components/customHeader';
-import { Images } from '../../../../assets';
+import CustomStatus from '../../../../components/CustomStatus';
 import InputField from '../../../../components/TextInput\'';
 import { vh, vw } from '../../../../styles/dimensions';
+import colors from '../../../../utils/colors';
+import styles from './style';
 
 type chooseModalItems = {
     id: number,
@@ -47,6 +46,9 @@ const ContactUs = ({ navigation }: ContactUsProps) => {
     const [isCategoryModalVisible, setIsCategoryModalVisible] = useState(false);
     const [image, setImage] = useState('');
     const [isButtonEnabled, setIsButtonEnabled] = useState(false);
+
+    const { height } = Dimensions.get('screen');
+    const isSmallDevice = height <= 667;
 
     useEffect(() => {
         setIsButtonEnabled(
@@ -120,10 +122,13 @@ const ContactUs = ({ navigation }: ContactUsProps) => {
     )
 
     return (
-        <KeyboardAvoidingView
-            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        <KeyboardAwareScrollView
+            bounces={false}
+            extraHeight={height * (isSmallDevice ? 0.38 : 0.41)}
+            showsVerticalScrollIndicator={false}
             style={{ flex: 1 }}
-            keyboardVerticalOffset={70}
+            contentContainerStyle={{ flexGrow: 1 }}
+            keyboardShouldPersistTaps='handled'
         >
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                 <View style={[styles.container, { paddingTop: insets.top }]}>
@@ -135,8 +140,7 @@ const ContactUs = ({ navigation }: ContactUsProps) => {
                         leftButtonStyle={styles.backButton}
                         onleftPress={navigation.goBack}
                         leftIconStyle={styles.backButton}
-                        />
-                    {/* <CustomHeader textHeading='Contact Us' onleftPress={backPress} leftIcon={Images.backarrow}  leftButtonStyle={styles.imageWrapper} headerStyle={styles.header} /> */}
+                    />
                     <ScrollView contentContainerStyle={{ flexGrow: 1 }} keyboardShouldPersistTaps="handled" showsVerticalScrollIndicator={false}>
                         <View>
                             <InputField
@@ -256,7 +260,7 @@ const ContactUs = ({ navigation }: ContactUsProps) => {
                     </Modal>
                 </View>
             </TouchableWithoutFeedback>
-        </KeyboardAvoidingView>
+        </KeyboardAwareScrollView>
     )
 }
 

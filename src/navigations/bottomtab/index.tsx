@@ -4,12 +4,13 @@ import {StyleSheet, View, Image} from 'react-native';
 import {ScreenNames} from '../../utils/screenNames';
 import colors from '../../utils/colors';
 import { Images } from '../../assets';
-import Category from '../../modules/bottomTabs/category';
+
 import Home from '../../modules/bottomTabs/home';
 import More from '../../modules/bottomTabs/more';
 import Promotion from '../../modules/bottomTabs/promotion';
 import Training from '../../modules/bottomTabs/training';
 import { vh, vw } from '../../styles';
+import Category from '../../modules/bottomTabs/products';
 
 const Tab = createBottomTabNavigator();
 

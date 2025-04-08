@@ -4,7 +4,6 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import styles from './style';
 import CustomStatus from '../../components/CustomStatus';
 import colors from '../../utils/colors';
-import CustomFlatList from '../../components/CustomFlatList';
 import { Images } from '../../assets';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import CustomCard from '../../components/CustomCard';
@@ -43,9 +42,7 @@ type DownLoadContentScreenProps = {
 const DownLoadContent: React.FC<DownLoadContentScreenProps> = ({ navigation }) => {
   const insets = useSafeAreaInsets();
   const [expandedCard, setExpandedCard] = useState<number | null>(null);
-  const backPress = () => {
-    navigation.goBack()
-  }
+
   const toggleExpand = (id: number) => {
     setExpandedCard(prevId => (prevId === id ? null : id));
   };
@@ -67,9 +64,9 @@ const DownLoadContent: React.FC<DownLoadContentScreenProps> = ({ navigation }) =
         description={''}
         showAccordion={true}
         cardStyle={styles.containerInside}
-        unexpandImage={Images.right}
+        unexpandImage={Images.rightArrow}
         iconColor={colors.lightBlack}
-        iconSize={12}
+        iconSize={24}
         onAccordionPress={() => toggleExpand(item.id)}
       />
     )
@@ -97,6 +94,7 @@ const DownLoadContent: React.FC<DownLoadContentScreenProps> = ({ navigation }) =
         }
         description={
           <FlatList
+            removeClippedSubviews={false}
             data={data1}
             renderItem={renderItem}
             keyExtractor={(item) => item.id}
@@ -106,7 +104,6 @@ const DownLoadContent: React.FC<DownLoadContentScreenProps> = ({ navigation }) =
         cardStyle={styles.firstContainer}
         expandImage={Images.upArrow}
         unexpandImage={Images.downArrow}
-        // onAccordionPress={notificationPress}
         showAccordion={true}
         iconColor={colors.lightBlack}
         iconSize={11}

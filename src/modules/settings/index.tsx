@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal, Text, View } from 'react-native';
+import { Modal, ScrollView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import CustomStatus from '../../components/CustomStatus';
 import styles from './style';
@@ -16,10 +16,11 @@ type RootStackParamList = {
     ToggleNotifications: undefined;
     FaqScreen: undefined;
     WebViewScreen: {url:string};
-    ContactUs: undefined
+    ContactUs: undefined;
+    CustomerSupportScreen:undefined
 }
 
-type SettingScreenProps = NativeStackScreenProps<RootStackParamList, 'Setting'>;
+type SettingScreenProps = NativeStackScreenProps<RootStackParamList>;
 
 const Setting: React.FC<SettingScreenProps> = ({ navigation }) => {
     const insets = useSafeAreaInsets();
@@ -53,6 +54,10 @@ const notificationPress = () => {
 
    const onContactUsPress = () =>{
     navigation.navigate(ScreenNames.ContactUs);
+   }
+
+   const onCustomerSupport = () =>{
+    navigation.navigate(ScreenNames.CustomerSupportScreen);
    }
   
   /**
@@ -89,19 +94,7 @@ const notificationPress = () => {
             onleftPress={navigation.goBack}
             leftIconStyle={styles.backButton}
             />
-            <View>
-                <Text style={styles.headerText}>Permissions</Text>
-                <CustomCard
-                    title={'Notifications'}
-                    description={''}
-                    cardStyle={styles.firstContainer}
-                    unexpandImage={Images.rightArrow}
-                    titleStyle={styles.text}
-                    onAccordionPress={notificationPress}
-                    showAccordion={true}
-                    iconColor={Colors.lightBlack}
-                    iconSize={14}
-                />
+            <ScrollView showsVerticalScrollIndicator={false} >
                 <Text style={styles.headerText}>Help</Text>
                 <View style={styles.secondContainer}>
                     <CustomCard
@@ -125,6 +118,7 @@ const notificationPress = () => {
                         showAccordion={true}
                         iconColor={Colors.lightBlack}
                         iconSize={14}
+                        onAccordionPress={onCustomerSupport}
                     />
                     <View style={styles.line}></View>
                     <CustomCard
@@ -137,6 +131,54 @@ const notificationPress = () => {
                         iconColor={Colors.lightBlack}
                         iconSize={14}
                         onAccordionPress={onContactUsPress}
+                    />
+                    <View style={styles.line}></View>
+                    <CustomCard
+                        title={'Global Honda'}
+                        description={''}
+                        cardStyle={styles.firstContainer1}
+                        unexpandImage={Images.rightArrow}
+                        titleStyle={styles.text}
+                        showAccordion={true}
+                        iconColor={Colors.lightBlack}
+                        iconSize={14}
+                        // onAccordionPress={onContactUsPress}
+                    />
+                    <View style={styles.line}></View>
+                    <CustomCard
+                        title={'Global Brand Slogan'}
+                        description={''}
+                        cardStyle={styles.firstContainer1}
+                        unexpandImage={Images.rightArrow}
+                        titleStyle={styles.text}
+                        showAccordion={true}
+                        iconColor={Colors.lightBlack}
+                        iconSize={14}
+                        // onAccordionPress={onContactUsPress}
+                    />
+                    <View style={styles.line}></View>
+                    <CustomCard
+                        title={'Honda History'}
+                        description={''}
+                        cardStyle={styles.firstContainer1}
+                        unexpandImage={Images.rightArrow}
+                        titleStyle={styles.text}
+                        showAccordion={true}
+                        iconColor={Colors.lightBlack}
+                        iconSize={14}
+                        // onAccordionPress={onContactUsPress}
+                    />
+                    <View style={styles.line}></View>
+                    <CustomCard
+                        title={'Honda Philosophy'}
+                        description={''}
+                        cardStyle={styles.firstContainer1}
+                        unexpandImage={Images.rightArrow}
+                        titleStyle={styles.text}
+                        showAccordion={true}
+                        iconColor={Colors.lightBlack}
+                        iconSize={14}
+                        // onAccordionPress={onContactUsPress}
                     />
                 </View>
                 <Text style={styles.headerText}>About</Text>
@@ -165,6 +207,18 @@ const notificationPress = () => {
                         iconSize={14}
                     />
                 </View>
+                <Text style={styles.headerText}>Permissions</Text>
+                <CustomCard
+                    title={'Notifications'}
+                    description={''}
+                    cardStyle={styles.firstContainer}
+                    unexpandImage={Images.rightArrow}
+                    titleStyle={styles.text}
+                    onAccordionPress={notificationPress}
+                    showAccordion={true}
+                    iconColor={Colors.lightBlack}
+                    iconSize={14}
+                />
                 <Text style={styles.headerText}>Account  Control</Text>
                 <CustomCard
                     title={'Delete Account'}
@@ -177,7 +231,7 @@ const notificationPress = () => {
                     iconColor={Colors.lightBlack}
                     iconSize={14}
                 />
-            </View>
+            </ScrollView>
             <Modal transparent visible={isDeleteModalVisible} animationType="slide">
                 <CustomLogout
                     title="Delete Account"

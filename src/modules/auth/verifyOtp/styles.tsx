@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {vw, vh, screenWidth} from '../../../styles';
+import {vw, vh, screenWidth, normalize, FONTS} from '../../../styles';
 import colors from '../../../utils/colors';
 
 const styles = StyleSheet.create({
@@ -47,14 +47,14 @@ const styles = StyleSheet.create({
   subtitle: {
     fontSize: vh(16),
     color: '#6B7280',
-    marginVertical: vh(10),
+    marginVertical: vh(8),
     fontWeight: '400',
   },
   changeNumber: {
     fontSize: vh(16),
     color: colors.black,
     fontWeight: '400',
-    marginTop: vh(5),
+   
     textDecorationLine: 'underline',
   },
   otpContainer: {
@@ -121,21 +121,22 @@ const styles = StyleSheet.create({
   },
   bottomView: {
     justifyContent: 'flex-end',
-    flex: .9,
+    flex: .88,
   },
   button: {
     backgroundColor: '#E41D2D',
-    paddingVertical: 15,
+    height:vh(56),
     borderRadius: vh(15),
     alignItems: 'center',
     width: screenWidth - vh(32),
   },
   disabledButton: {
-    backgroundColor: '#ddd',
+    backgroundColor: colors.backButtonBackground,
   },
   buttonText: {
-    fontSize: 16,
-    fontWeight: 'bold',
+    fontSize: normalize(16),
+    fontFamily:FONTS.ROBOTO_BOLD
+   
   },
 });
 

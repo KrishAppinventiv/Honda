@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   header: {
-    paddingVertical: vh(12),
+    paddingHorizontal:vw(16)
   },
   backButton: {
     backgroundColor: colors.headerButton,

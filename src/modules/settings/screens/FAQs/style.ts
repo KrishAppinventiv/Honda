@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native";
 import Colors from "../../../../utils/colors";
 import { vw, vh, normalize } from "../../../../styles";
+import { ROBOTO_REGULAR } from "../../../../styles/Fonts";
 
 
 const styles = StyleSheet.create({
@@ -10,7 +11,8 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.white
     },
     header: {
-        marginBottom: vw(20)
+        marginBottom: vw(20),
+        paddingHorizontal: 0
     },
     firstContainer: {
         backgroundColor: Colors.white,
@@ -36,12 +38,13 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: normalize(16),
+        fontFamily: ROBOTO_REGULAR,
         fontWeight: 400,
         color: Colors.black
     },
     description: {
         fontSize: normalize(14),
-        fontWeight: 400,
+        fontFamily: ROBOTO_REGULAR,
         color: Colors.lightGreyBlue,
     }
 })

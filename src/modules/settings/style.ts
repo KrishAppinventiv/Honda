@@ -9,7 +9,8 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.white
     },
     header: {
-        marginBottom: vh(20)
+        marginBottom: vh(20),
+        paddingHorizontal: 0
     },
     backButton: {
         width:vw(40),

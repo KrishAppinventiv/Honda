@@ -19,12 +19,13 @@ import SectionHeader from '../../../components/SectionHeader';
 import HiValueCard from '../../../components/valueCard';
 import CustomHeader from '../../../components/customHeader';
 import CustomStatusBar from '../../../components/statusBar';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import CustomSearch from '../../../components/CustomSearchBar';
 import styles from './styles';
 import CustomFlatList from '../../../components/CustomFlatList';
 import { Honda } from '../../../staticData';
 import { vw } from '../../../styles';
+import { downloadAndOpenPDF } from '../../../utils/commonFunctions';
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -40,7 +41,7 @@ interface Item {
 }
 const Promotion: React.FC = () => {
 
-
+  const insets = useSafeAreaInsets();
   const [searchTerm, setSearchTerm] = useState('');
   const categories = [
     {id: '1', name: 'Battery operated Hand Tools', image: Images.battery},
@@ -111,17 +112,36 @@ const Promotion: React.FC = () => {
   const navigation = useNavigation<HomeScreenNavigationProp>();
 
 
-  const ImageHeaderRenderItem = ({item}: {item: Item}) => (
-    <TouchableOpacity style={styles.itemContainer} activeOpacity={0.5}>
-      <View style={styles.imageContainer}>
-        <Image source={item.image} style={styles.itemImage} />
-      </View>
-      <Text style={styles.itemTitle}>{item.title}</Text>
-    </TouchableOpacity>
-  );
+  const ImageHeaderRenderItem = React.memo(({ item }: { item: Item }) => {
+
+    const handlePress = async () => {
+      if (item?.type === 'link' && item?.link) {
+        // Handle YouTube link\
+
+    
+        const videoId = extractYouTubeVideoId(item.link);
+        if (videoId) {
+          navigation.navigate(ScreenNames.YoutubeVideoScreen, { videoId });
+        }
+      } else if (item?.type === 'file' && item?.link) {
+        // Handle PDF file download
+       
+        await downloadAndOpenPDF(item.link, 'sample.pdf');
+      }
+    };
+  
+    return (
+      <TouchableOpacity style={styles.itemContainer} activeOpacity={0.5} onPress={handlePress}>
+        <View style={styles.imageContainer}>
+          <Image source={item.image} style={styles.itemImage} />
+        </View>
+        <Text style={styles.itemTitle}>{item.title}</Text>
+      </TouchableOpacity>
+    );
+  });
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={[styles.container, {paddingTop: insets.top}]}>
     <CustomStatusBar />
     <CustomHeader
         headerStyle={styles.header}
@@ -142,7 +162,7 @@ const Promotion: React.FC = () => {
         <View style={{paddingHorizontal: vw(8)}}>
           <CustomFlatList
             data={Honda}
-            renderItem={ImageHeaderRenderItem}
+            renderItem={({ item }) => <ImageHeaderRenderItem item={item} />}
             keyExtractor={item => item.id}
             horizontal={true}
             header
@@ -156,7 +176,7 @@ const Promotion: React.FC = () => {
 
            <CustomFlatList
             data={Honda}
-            renderItem={ImageHeaderRenderItem}
+            renderItem={({ item }) => <ImageHeaderRenderItem item={item} />}
             keyExtractor={item => item.id}
             horizontal={true}
             header
@@ -170,7 +190,7 @@ const Promotion: React.FC = () => {
 
            <CustomFlatList
             data={Honda}
-            renderItem={ImageHeaderRenderItem}
+            renderItem={({ item }) => <ImageHeaderRenderItem item={item} />}
             keyExtractor={item => item.id}
             horizontal={true}
             header
@@ -183,7 +203,7 @@ const Promotion: React.FC = () => {
           />
           </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 

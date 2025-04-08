@@ -3,6 +3,7 @@ import {
   LayoutAnimation,
   UIManager,
   Linking,
+  Alert,
 } from 'react-native';
 import RNFS from 'react-native-fs';
 import Permissions, {
@@ -15,6 +16,10 @@ import moment from 'moment';
 // import {CommonFunctions, END_POINTS} from '_utils';
 import { SERVICE_URLS } from '../services';
 import { END_POINTS, CommonFunctions } from '.';
+import RNFetchBlob from 'react-native-blob-util';
+
+
+import FileViewer from 'react-native-file-viewer';
 
 const _linearAnimation = () => {
   if (Platform.OS === 'android') {
@@ -1467,4 +1472,66 @@ export default {
   validateField
 };
 
+
+const requestPdfStoragePermission = async () => {
+  if (Platform.OS === 'android') {
+    if (Platform.Version >= 33) {
+      // For Android 13+ (API 33+)
+      const imagePermission = await request(PERMISSIONS.ANDROID.READ_MEDIA_IMAGES);
+      const videoPermission = await request(PERMISSIONS.ANDROID.READ_MEDIA_VIDEO);
+      const audioPermission = await request(PERMISSIONS.ANDROID.READ_MEDIA_AUDIO);
+
+      return (
+        imagePermission === RESULTS.GRANTED ||
+        videoPermission === RESULTS.GRANTED ||
+        audioPermission === RESULTS.GRANTED
+      );
+    } else {
+      // For Android 12 and below
+      const permission = PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE;
+      const result = await request(permission);
+      return result === RESULTS.GRANTED;
+    }
+  }
+  return true; 
+};
+
+
+export const downloadAndOpenPDF = async (pdfUrl: string, fileName: string) => {
+  try {
+    // Ensure storage permission is granted
+    const hasPermission = await requestPdfStoragePermission();
+    if (!hasPermission) {
+      Alert.alert('Permission Denied', 'Storage permission is required to download files.');
+      return;
+    }
+
+    const filePath = `${RNFS.DocumentDirectoryPath}/${fileName}`;
+
+    // Download the file
+    const response = await RNFetchBlob.config({
+      fileCache: true,
+      path: filePath,
+    }).fetch('GET', pdfUrl);
+    
+    console.log('File downloaded to:', response.path());
+
+    Alert.alert('Download Complete', 'File saved successfully!', [
+      {
+        text: 'Open',
+        onPress: async () => {
+          try {
+            await FileViewer.open(response.path());
+          } catch (err) {
+            console.log('Error opening file:', err);
+          }
+        },
+      },
+      { text: 'OK', style: 'cancel' },
+    ]);
+  } catch (error) {
+    console.error('Error downloading file:', error);
+    Alert.alert('Error', 'Failed to download the file.');
+  }
+};
 

@@ -66,11 +66,6 @@ const ProductDetailPage = ({navigation}: ProductDetailPageProps) => {
     </View>
   );
 
-  // Navigating back on Back Press
-  const onBackPress = () => {
-    navigation.goBack();
-  };
-
   // Function to Toggle the expanded state of Description
   const toggleDescription = () => {
     setExpanded(!expanded);

@@ -9,7 +9,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   header: {
-    paddingVertical: vh(12),
     paddingHorizontal: vh(16),
   },
   profileIcon: {

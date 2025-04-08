@@ -15,14 +15,13 @@ const styles = StyleSheet.create({
     paddingTop: vh(20),
   },
   header: {
-     paddingVertical: vh(14),
      borderBottomWidth: vw(0.5),
      borderBottomColor: 'rgba(0, 0, 0, 0.07)',
      shadowColor: 'rgba(255, 255, 255, 1)',
      shadowOffset: {width: 0, height: 0.5},
      shadowOpacity: vw(0.4),
      elevation: 2,
-     paddingHorizontal: vw(16),
+     paddingHorizontal:vw(16)
   },
   backButton: {
     backgroundColor: colors.backButtonBackground,

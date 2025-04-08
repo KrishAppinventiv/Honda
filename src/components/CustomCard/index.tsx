@@ -26,7 +26,7 @@ interface CustomCardProps {
   unexpandImage?: any;
   iconSize?: number;
   iconColor?: string;
-  switchSize?: {width: number; height: number};
+  switchSize?: { width: number; height: number };
   switchColors?: {
     trackActive?: string;
     trackInactive?: string;
@@ -58,9 +58,9 @@ const CustomCard = ({
   descriptionStyle
 }: CustomCardProps) => {
   return (
-    <TouchableOpacity style={[styles.card, cardStyle]} onPress={onAccordionPress}>
+    <TouchableOpacity style={[styles.card, cardStyle]} onPress={onAccordionPress} activeOpacity={0.8}>
       <View style={styles.header}>
-      <View style={styles.titleContainer}>
+        <View style={styles.titleContainer}>
           {typeof title === 'string' ? (
             <Text style={[styles.title, titleStyle]}>{title}</Text>
           ) : (
@@ -74,8 +74,8 @@ const CustomCard = ({
                 styles.switchContainer,
                 switchSize && {
                   transform: [
-                    {scaleX: switchSize.width / 51},
-                    {scaleY: switchSize.height / 31},
+                    { scaleX: switchSize.width / 51 },
+                    { scaleY: switchSize.height / 31 },
                   ],
                 },
               ]}>
@@ -132,12 +132,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 8,
     padding: 16,
-    
-    // elevation: 2,
-    // shadowColor: '#000',
-    // shadowOffset: {width: 0, height: 2},
-    // shadowOpacity: 0.1,
-    // shadowRadius: 4,
   },
   header: {
     flexDirection: 'row',

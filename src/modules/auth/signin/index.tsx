@@ -20,6 +20,8 @@ import GlobalHeader from '../../../components/GlobalHeader';
 import Button from '../../../components/Button';
 import CustomStatusBar from '../../../components/statusBar';
 import CustomHeader from '../../../components/customHeader';
+import CustomButton from '../../../components/CustomButton';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 type SignNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -30,12 +32,15 @@ const SignIn = () => {
   const {roleName} = route.params || {roleName: 'Dealer'};
   const [phoneNumber, setPhoneNumber] = useState('');
   const [isValid, setIsValid] = useState(false);
+  const [hasNonNumeric, setHasNonNumeric] = useState(false);
   const navigation = useNavigation<SignNavigationProp>();
+  const insets = useSafeAreaInsets();
 
   const handlePhoneChange = (text: string) => {
-    const regex = /^[6-9]\d{9}$/;
-    setPhoneNumber(text);
-    setIsValid(regex.test(text));
+    const numericText = text.replace(/[^0-9]/g, ''); // Remove non-numeric characters
+    setPhoneNumber(numericText);
+    setIsValid(/^[6-9]\d{9}$/.test(numericText));
+    setHasNonNumeric(numericText.length !== text.length); // Check for non-numeric characters
   };
 
   const onPressPrivacyPolicey = () => {
@@ -44,8 +49,14 @@ const SignIn = () => {
     });
   };
 
+  const onPressTermPolicey = () => {
+    navigation.navigate(ScreenNames.WebViewScreen, {
+      url: 'https://www.hondacarindia.com/terms-and-conditions',
+    });
+  };
+
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={[styles.container, {paddingTop: insets.top}]}>
       <View style={styles.innerContainer}>
         <CustomStatusBar />
         <CustomHeader
@@ -64,7 +75,8 @@ const SignIn = () => {
             !isValid && phoneNumber.length > 0 && styles.errorBorder,
           ]}>
           <Text style={styles.countryCode}>+ 91</Text>
-          <Text style={styles.partition}>|</Text>
+          {/* <Text style={styles.partition}>|</Text> */}
+          <Image style={styles.partition} source={Images.verticalLine}/>
           <TextInput
             style={styles.input}
             keyboardType="numeric"
@@ -73,28 +85,28 @@ const SignIn = () => {
             placeholderTextColor={'#999'}
             value={phoneNumber}
             onChangeText={handlePhoneChange}
-            onKeyPress={({ nativeEvent }) => {
+            onKeyPress={({nativeEvent}) => {
               if (!/^\d$/.test(nativeEvent.key)) {
-                nativeEvent.preventDefault();
+                return;
               }
             }}
           />
         </View>
-
-        {!isValid && phoneNumber.length > 0 && (
-          <Text style={styles.errorText}>Enter a valid 10-digit number</Text>
-        )}
+        {(!isValid || hasNonNumeric) &&
+          (phoneNumber.length > 0 || hasNonNumeric) && (
+            <Text style={styles.errorText}>Enter a valid 10-digit number</Text>
+          )}
 
         <View style={styles.bottomView}>
-          <Button
-            onPress={() => navigation.navigate(ScreenNames.Otp)}
-            disabled={!isValid}
-            style={[styles.button, !isValid && styles.disabledButton]}
-            text={'GET OTP'}
-            textStyle={[
-              styles.buttonText,
-              {color: !isValid ? colors.grey : '#fff'},
-            ]}
+
+          <CustomButton
+            buttonText="GET OTP"
+            onPress={() => navigation.navigate(ScreenNames.Otp, { phoneNumber })}
+            isButtonDisabled={!isValid}
+            buttonStyle={styles.button}
+            disabledButtonStyle={styles.disabledButton}
+            textStyle={styles.buttonText}
+            disabledButtonTextStyle={{color: colors.descritptionText}}
           />
 
           <Text style={styles.footerText}>
@@ -102,11 +114,14 @@ const SignIn = () => {
             <Text onPress={onPressPrivacyPolicey} style={styles.link}>
               Privacy Policy
             </Text>{' '}
-            & <Text style={styles.link}>Terms & Conditions</Text>
+            &{' '}
+            <Text onPress={onPressTermPolicey} style={styles.link}>
+              Terms & Conditions
+            </Text>
           </Text>
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 

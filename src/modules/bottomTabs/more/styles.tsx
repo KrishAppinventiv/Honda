@@ -7,7 +7,7 @@ import { vw, vh, normalize } from "../../../styles";
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor:colors.white,
+        backgroundColor: colors.white,
         paddingHorizontal: 16,
     },
     image: {
@@ -15,7 +15,8 @@ const styles = StyleSheet.create({
         height: vw(40)
     },
     header: {
-        paddingVertical: vh(12)
+        paddingVertical: vh(12),
+        paddingHorizontal: 0,
     },
     cardContainer: {
         flexDirection: 'row',
@@ -67,7 +68,7 @@ const styles = StyleSheet.create({
         tintColor: Colors.white,
         width: vw(18),
         height: vw(18),
-        alignSelf:'center'
+        alignSelf: 'center'
     },
     firstContainer: {
         backgroundColor: Colors.white,
@@ -87,17 +88,22 @@ const styles = StyleSheet.create({
         fontWeight: 400,
         color: Colors.black
     },
-    leftButtonStyle:{
-        backgroundColor:colors.backButtonBackground,
-      },
-      leftIconStyle:{
-        width:vw(40),
-        height:vw(40),
-        resizeMode:'contain'
-      },
-      rightButtonStyle:{
-        backgroundColor:colors.backButtonBackground,
-      }
+    leftButtonStyle: {
+        backgroundColor: colors.backButtonBackground,
+    },
+    leftIconStyle: {
+        width: vw(40),
+        height: vw(40),
+        resizeMode: 'contain'
+    },
+    rightButtonStyle: {
+        backgroundColor: colors.backButtonBackground,
+    },
+    buttonContainer: {
+        borderRadius: 12,
+        backgroundColor: '#F3F6FA',
+        borderColor: '#F3F6FA'
+    }
 })
 
 export default styles;
